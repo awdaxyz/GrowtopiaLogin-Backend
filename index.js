@@ -1,63 +1,116 @@
 const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
-const rateLimiter = require('express-rate-limit');
 const compression = require('compression');
+const bodyParser = require('body-parser');
 
-app.use(compression({
-    level: 5,
-    threshold: 0,
-    filter: (req, res) => {
-        if (req.headers['x-no-compression']) {
-            return false;
-        }
-        return compression.filter(req, res);
+const ware = express();
+let reqC = {};
+
+ware.set('trust proxy', true);
+ware.set('view engine', 'ejs');
+
+ware.use(
+    compression({
+        level: 1,
+        threshold: 0,
+        filter: (req, res) => !req.headers['x-no-compression'] && compression.filter(req, res),
+    })
+);
+
+ware.use((req, res, next) => {
+    const clientIP = req.ip;
+    const currentTime = Math.floor(Date.now() / 1000);
+    const timeWindow = 10 * 60;
+    const maxRequests = 100;
+    if (!reqC[clientIP]) {
+        reqC[clientIP] = [];
     }
-}));
-app.set('view engine', 'ejs');
-app.set('trust proxy', 1);
-app.use(function (req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header(
-        'Access-Control-Allow-Headers',
-        'Origin, X-Requested-With, Content-Type, Accept',
-    );
-    console.log(`[${new Date().toLocaleString()}] ${req.method} ${req.url} - ${res.statusCode}`);
+    reqC[clientIP] = reqC[clientIP].filter((timestamp) => timestamp > currentTime - timeWindow);
+    reqC[clientIP].push(currentTime);
+    if (requestCounts[clientIP].length > maxRequests) {
+        return res.status(429).json({ status: 'error', message: 'Too many requests, please try again later.' });
+    }
     next();
 });
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(rateLimiter({ windowMs: 15 * 60 * 1000, max: 100, headers: true }));
 
-app.all('/player/login/dashboard', function (req, res) {
-    const tData = {};
-    try {
-        const uData = JSON.stringify(req.body).split('"')[1].split('\\n'); const uName = uData[0].split('|'); const uPass = uData[1].split('|');
-        for (let i = 0; i < uData.length - 0; i++) { const d = uData[i].split('|'); tData[d[0]] = d[1]; }
-        if (uName[0] && uPass[0]) { res.redirect('/player/growid/login/validate'); }
-    } catch (why) { console.log(`Warning: ${why}`); }
-
-    res.render(__dirname + '/public/html/dashboard.html', { data: tData });
-});
-
-app.all('/player/growid/login/validate', (req, res) => {
-    const _token = req.body._token;
-    const growId = req.body.growId;
-    const password = req.body.password;
-
-    const token = Buffer.from(
-        `_token=${_token}&growId=${growId}&password=${password}`,
-    ).toString('base64');
-
-    res.send(
-        `{"status":"success","message":"Account Validated.","token":"${token}","url":"","accountType":"growtopia"}`,
+ware.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    console.log(
+        `${chalk.cyan(`[${new Date().toLocaleString()}]`)} ` +
+        `${chalk.yellow(req.url)} ` +
+        `${chalk.green(req.method)} ` +
+        `${chalk.red(`Status: ${res.statusCode}`)}`
     );
+    next();
 });
 
-app.get('/', function (req, res) {
-    res.send('Hello World!');
+ware.use(bodyParser.urlencoded({ extended: true }));
+ware.use(express.json());
+
+ware.all('/player/login/dashboard', (req, res) => {
+    const gameData = {};
+    try {
+        const rData = JSON.stringify(req.body).split('"')[1].split('\\n');
+        const user = rData[0].split('|');
+        const pass = rData[1].split('|');
+        rData.forEach((line) => {
+            const [key, value] = line.split('|');
+            gameData[key] = value;
+        });
+
+        if (user && pass) {
+            return res.redirect('/player/growid/login/validate');
+        }
+    } catch (error) {
+        console.error(`[ERROR] Parsing error: ${error.message}`);
+    }
+
+    res.render(`${__dirname}/public/html/dashboard.html`, { data: parsedData });
 });
 
-app.listen(5000, function () {
-    console.log('Listening on port 5000');
+ware.post('/player/growid/login/validate', (req, res) => {
+    const { _token, growId, password } = req.body;
+
+    const eToken = Buffer.from(`_token=${_token}&growId=${growId}&password=${password}`).toString('base64');
+    res.json({
+        status: 'success',
+        message: 'Account Validated.',
+        token: eToken,
+        url: '',
+        accountType: 'growtopia',
+    });
 });
+
+ware.all('/player/growid/checktoken', (req, res) => {
+    const { refreshToken } = req.body;
+    res.json({
+        status: 'success',
+        message: 'Account Validated.',
+        token: refreshToken,
+        url: '',
+        accountType: 'growtopia',
+    });
+});
+
+ware.all('/', (req, res) => {
+    const gameData = {};
+    try {
+        const rData = JSON.stringify(req.body).split('"')[1].split('\\n');
+        const user = rData[0].split('|');
+        const pass = rData[1].split('|');
+        rData.forEach((line) => {
+            const [key, value] = line.split('|');
+            gameData[key] = value;
+        });
+
+        if (user && pass) {
+            return res.redirect('/player/growid/login/validate');
+        }
+    } catch (error) {
+        console.error(`[ERROR] Parsing error: ${error.message}`);
+    }
+
+    res.render(`${__dirname}/public/html/dashboard.html`, { data: parsedData });
+});
+
+//module.exports = (req, res) => ware(req, res);
