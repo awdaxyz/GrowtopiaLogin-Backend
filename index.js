@@ -112,7 +112,7 @@ ware.all('/player/growid/checktoken', (req, res) => {
 });
 
 // Route default
-ware.all('/', (req, res) => {
+ware.get('/', (req, res) => {
     const gameData = {};
     try {
         const rData = JSON.stringify(req.body).split('"')[1].split('\\n');
