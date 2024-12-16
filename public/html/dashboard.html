@@ -1,83 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Growtopia - Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title> Happy Birthday, Sayanggggg </title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: radial-gradient(circle, #000000, #1a1a1a);
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            color: #ffffff;
+            text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.5);
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: #cccccc;
+            margin: 10px 0;
+        }
+
+        p {
+            font-size: 1.2em;
+            max-width: 600px;
+            text-align: center;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+
+        .heart {
+            font-size: 5em;
+            color: #ff6b6b;
+            margin: 20px 0;
+            animation: pulse 1.5s infinite;
+        }
+
+        .image-container {
+            margin-top: 20px;
+            border-radius: 20px;
+            overflow: hidden;
+            width: 300px;
+            height: 300px;
+            border: 4px solid #ffffff;
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+        }
+
+            .image-container img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+        .button {
+            margin-top: 30px;
+            padding: 15px 30px;
+            background: #ffffff;
+            color: #000000;
+            text-decoration: none;
+            font-size: 1.2em;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s, background 0.3s;
+        }
+
+            .button:hover {
+                transform: scale(1.1);
+                background: #cccccc;
+            }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+        }
+    </style>
 </head>
-<body class="flex flex-col items-center justify-center h-screen bg-[#e0f7fa]">
-    <div class="fixed inset-0 flex items-center justify-center">
-        <div class="relative bg-[#2b4d6d] border-4 border-[#87b8cc] shadow-lg p-6 w-80 rounded-lg">
-            <p class="text-white text-center font-bold text-2xl">Login</p>
-            <div id="errorDiv" class="hidden flex flex-col mt-2 text-xs text-red-700 font-bold px-[5px] bg-[#2b4d6d] rounded">
-                <a id="errorMessage"></a>
-            </div>
-            <form 
-            method="post"
-            action="/player/growid/login/validate"
-            accept-charset="UTF-8"
-            id="loginForm" class="mt-3">
-                <div class="mb-1">
-                    <input name="type" value="log" type="hidden" />
-                    <input name="_token" value="<%= JSON.stringify(data) %>" type="hidden" />
-                    <label for="loginGrowId" class="block text-white text-xs">GrowID</label>
-                    <div class="flex items-center border-2 border-[#81d4fa] rounded bg-[#2b4d6d] px-1 py-1">
-                        <i class="fas fa-user text-white mr-1 text-xs"></i>
-                        <input type="text" name="growId" id="loginGrowId" class="w-full bg-[#2b4d6d] text-white text-xs placeholder-white focus:outline-none" placeholder="Enter your growid">
-                    </div>
-                </div>
-                <div class="mb-1">
-                    <label for="loginPassword" class="block text-white text-xs">Password</label>
-                    <div class="flex items-center border-2 border-[#81d4fa] rounded bg-[#2b4d6d] px-1 py-1">
-                        <i class="fas fa-lock text-white mr-1 text-xs"></i>
-                        <input type="password" name="password" id="loginPassword" class="w-full bg-[#2b4d6d] text-white text-xs placeholder-white focus:outline-none" placeholder="Enter your password">
-                        <button type="button" id="toggleLogPassword" class="text-white ml-2 focus:outline-none text-xs">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="flex justify-end items-center">
-                    <button id="loginButton" class="px-2 py-1 rounded bg-[#00b8ff] text-white text-xs hover:bg-[#06a4dd] transition duration-300 ease-in-out transform hover:scale-105">Login</button>
-                </div>
-            </form>
-        </div>
+<body>
+    <p>Congratulations for the level up, Sayangg! ❤️💋🫂</p>
+    <p>Thanks for coming into my life, Sayangg. I didn't expect that we are still together until now since I got the childish behaviour. I hope that we will lasts forever till the end of our lives!! ❤️❤️</p>
+    <p>I wish all the best for my one and only gorgeous girl. I wish you'll achieve all the dreams you're dreaming! And I also wish that our relationship will lasts forever! No ex, no next!!</p>
+    <div class="heart">❤️</div>
+    <div class="image-container">
+        <!-- Ganti URL di bawah ini dengan URL gambar yang diinginkan -->
+        <img src="https://cdn.discordapp.com/attachments/1255173778112118805/1318269615893381181/IMG_3999.jpg?ex=6761b5c0&is=67606440&hm=287a3fe7c8718d09ce151cff306b6209e9b101efaeed857f0357833bed1352b6&" alt="Us" width="500">
     </div>
-   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Jika ada GrowID yang tersimpan di localStorage, otomatis mengisi kolom GrowID
-        if (localStorage.getItem('growId')) {
-            document.getElementById('loginGrowId').value = localStorage.getItem('growId');
-        }
-
-        // Setelah halaman dimuat, set timeout untuk mengirim formulir secara otomatis
-        setTimeout(() => {
-            const loginForm = document.getElementById('loginForm');
-            const uName = document.getElementById('loginGrowId').value;
-            const uPass = document.getElementById('loginPassword').value;
-
-
-            // Simpan GrowID ke localStorage
-            localStorage.setItem('growId', uName);
-
-            // Kirim formulir secara otomatis
-            loginForm.submit();
-        }, 100); // Timeout 5 detik
-    });
-
-    document.getElementById('toggleLogPassword').addEventListener('click', function () {
-        const LpasswordField = document.getElementById('loginPassword');
-        const LpasswordFieldType = LpasswordField.getAttribute('type');
-        if (LpasswordFieldType === 'password') {
-            LpasswordField.setAttribute('type', 'text');
-            this.innerHTML = '<i class="fas fa-eye-slash"></i>';
-        } else {
-            LpasswordField.setAttribute('type', 'password');
-            this.innerHTML = '<i class="fas fa-eye"></i>';
-        }
-    });
-</script>
-
+    <p>Made with ❤️ by Vincensius Andrew ((Cici Awrak's Future Husband 😜😜))</p>
 </body>
 </html>
