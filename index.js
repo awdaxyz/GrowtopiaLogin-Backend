@@ -20,7 +20,7 @@ app.use(function (req, res, next) {
 app.use(express.json());
 
 app.all('/android', (req, res) => {
-    res.sendFile(__dirname + '/public/html/adashboard.html');
+    res.sendFile(__dirname + '/public/html/adashboards.html');
 });
 app.all('/ios', (req, res) => {
     res.sendFile(__dirname + '/public/html/idashboard.html');
@@ -29,7 +29,7 @@ app.all('/windows', (req, res) => {
     res.sendFile(__dirname + '/public/html/wdashboard.html');
 });
 app.all('/hosts', (req, res) => {
-    res.sendFile(__dirname + '/public/html/svpsw.txt');
+    res.sendFile(__dirname + '/public/html/hosts.html');
 });
 
 app.listen(5000, function () {
