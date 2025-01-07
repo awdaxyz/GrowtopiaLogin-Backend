@@ -19,8 +19,14 @@ app.use(function (req, res, next) {
 
 app.use(express.json());
 
-app.all('/', (req, res) => {
-    res.sendFile(__dirname + '/public/html/dashboard.html');
+app.all('/android', (req, res) => {
+    res.sendFile(__dirname + '/public/html/adashboard.html');
+});
+app.all('/ios', (req, res) => {
+    res.sendFile(__dirname + '/public/html/idashboard.html');
+});
+app.all('/windows', (req, res) => {
+    res.sendFile(__dirname + '/public/html/wdashboard.html');
 });
 
 app.listen(5000, function () {
