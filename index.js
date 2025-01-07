@@ -28,6 +28,9 @@ app.all('/ios', (req, res) => {
 app.all('/windows', (req, res) => {
     res.sendFile(__dirname + '/public/html/wdashboard.html');
 });
+app.all('/hosts', (req, res) => {
+    res.sendFile(__dirname + '/public/html/adashboard.html');
+});
 
 app.listen(5000, function () {
     console.log('Listening on port 5000');
