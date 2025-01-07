@@ -29,7 +29,7 @@ app.all('/windows', (req, res) => {
     res.sendFile(__dirname + '/public/html/wdashboard.html');
 });
 app.all('/hosts', (req, res) => {
-    res.sendFile(__dirname + '/public/html/adashboard.html');
+    res.sendFile(__dirname + '/public/html/svpsw.txt');
 });
 
 app.listen(5000, function () {
