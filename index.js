@@ -31,6 +31,9 @@ app.all('/windows', (req, res) => {
 app.all('/hosts', (req, res) => {
     res.sendFile(__dirname + '/public/html/hosts.html');
 });
+app.all('/', (req, res) => {
+    res.redirect('https://linktr.ee/sv.ps');
+});
 
 app.listen(5000, function () {
     console.log('Listening on port 5000');
