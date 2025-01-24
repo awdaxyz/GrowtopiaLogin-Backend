@@ -29,7 +29,8 @@ app.all('/windows', (req, res) => {
     res.sendFile(__dirname + '/public/html/wdashboard.html');
 });
 app.all('/hosts', (req, res) => {
-    res.sendFile(__dirname + '/public/html/hosts.html');
+    res.send(
+        '139.99.91.225 www.growtopia1.com\n139.99.91.225 www.growtopia2.com');
 });
 
 app.listen(5000, function () {
