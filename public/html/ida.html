@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cara Masuk ke Growtopia Private Server</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            background: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            background: rgba(20, 20, 20, 0.9);
+            border: 5px solid #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            max-width: 600px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px #000000;
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+
+        ul {
+            text-align: left;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        li {
+            background: rgba(255, 255, 255, 0.1);
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+            color: #ffffff;
+            white-space: pre-wrap; /* Preserve spaces and newlines */
+        }
+
+        a {
+            color: #00ffff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+
+        button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid #ffffff;
+            color: #ffffff;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+            button:hover {
+                background: rgba(255, 255, 255, 0.4);
+                transform: scale(1.05);
+            }
+
+        .message {
+            margin-top: 10px;
+            font-size: 1em;
+            color: #00ff00;
+            display: none;
+        }
+
+            .message.error {
+                color: #ff0000;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>iOS<br/>(Surge 5)</h1>
+        <p>Copy & Paste</p>
+        <ul>
+            <li id="text-to-copy">[General]
+
+[Rule]
+FINAL,DIRECT
+
+[Host]
+growtopia1.com = 139.99.91.225
+growtopia2.com = 139.99.91.225
+www.growtopia1.com = 139.99.91.225
+www.growtopia2.com = 139.99.91.225</li>
+        </ul>
+        <button id="copy-button">Copy to Clipboard</button>
+        <div class="message" id="message">Copied to clipboard!</div>
+        <div class="message error" id="error-message">Failed to copy!</div>
+    </div>
+
+    <script>document.getElementById('copy-button').addEventListener('click', function () {
+            const textToCopy = document.getElementById('text-to-copy').innerText;
+            navigator.clipboard.writeText(textToCopy)
+                .then(() => {
+                    const message = document.getElementById('message');
+                    message.style.display = 'block';
+                    setTimeout(() => message.style.display = 'none', 2000);
+                })
+                .catch(() => {
+                    const errorMessage = document.getElementById('error-message');
+                    errorMessage.style.display = 'block';
+                    setTimeout(() => errorMessage.style.display = 'none', 2000);
+                });
+        });</script>
+</body>
+</html>
