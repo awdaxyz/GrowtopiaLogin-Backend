@@ -86,6 +86,17 @@
                 background: rgba(255, 255, 255, 0.4);
                 transform: scale(1.05);
             }
+
+        .message {
+            margin-top: 10px;
+            font-size: 1em;
+            color: #00ff00;
+            display: none;
+        }
+
+            .message.error {
+                color: #ff0000;
+            }
     </style>
 </head>
 <body>
@@ -93,8 +104,7 @@
         <h1>iOS</h1>
         <p>Copy & Paste</p>
         <ul>
-            <li>
-[General]
+            <li id="text-to-copy">[General]
 
 [Rule]
 FINAL,DIRECT
@@ -103,11 +113,26 @@ FINAL,DIRECT
 growtopia1.com = 139.99.91.225
 growtopia2.com = 139.99.91.225
 www.growtopia1.com = 139.99.91.225
-www.growtopia2.com = 139.99.91.225
-            </li>
+www.growtopia2.com = 139.99.91.225</li>
         </ul>
-        <div class="footer">
-        </div>
+        <button id="copy-button">Copy to Clipboard</button>
+        <div class="message" id="message">Copied to clipboard!</div>
+        <div class="message error" id="error-message">Failed to copy!</div>
     </div>
+
+    <script>document.getElementById('copy-button').addEventListener('click', function () {
+            const textToCopy = document.getElementById('text-to-copy').innerText;
+            navigator.clipboard.writeText(textToCopy)
+                .then(() => {
+                    const message = document.getElementById('message');
+                    message.style.display = 'block';
+                    setTimeout(() => message.style.display = 'none', 2000);
+                })
+                .catch(() => {
+                    const errorMessage = document.getElementById('error-message');
+                    errorMessage.style.display = 'block';
+                    setTimeout(() => errorMessage.style.display = 'none', 2000);
+                });
+        });</script>
 </body>
 </html>
