@@ -30,8 +30,7 @@ app.all('/windows', (req, res) => {
 });
 app.all('/hosts', (req, res) => {
     res.send(
-        '139.99.91.225 www.growtopia1.com'
-        + '139.99.91.225 www.growtopia2.com');
+        '139.99.91.225 www.growtopia1.com<br>139.99.91.225 www.growtopia2.com');
 });
 
 app.listen(5000, function () {
