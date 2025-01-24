@@ -20,13 +20,13 @@ app.use(function (req, res, next) {
 app.use(express.json());
 
 app.all('/android', (req, res) => {
-    res.sendFile(__dirname + '/public/html/adashboards.html');
+    res.sendFile(__dirname + '/public/html/ada.html');
 });
 app.all('/ios', (req, res) => {
-    res.sendFile(__dirname + '/public/html/idashboard.html');
+    res.sendFile(__dirname + '/public/html/ida.html');
 });
 app.all('/windows', (req, res) => {
-    res.sendFile(__dirname + '/public/html/wdashboard.html');
+    res.sendFile(__dirname + '/public/html/wda.html');
 });
 app.all('/hosts', (req, res) => {
     res.sendFile(__dirname + '/public/html/hosts.html');
