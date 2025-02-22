@@ -31,6 +31,9 @@ app.all('/windows', (req, res) => {
 app.all('/hosts', (req, res) => {
     res.sendFile(__dirname + '/public/html/hosts.html');
 });
+app.all('/file', (req, res) => {
+    res.redirect('https://www.mediafire.com/file/2bi5h8f24gyg8ud/svps-hosts.txt/file');
+});
 app.all('/', (req, res) => {
     res.redirect('https://linktr.ee/sv.ps');
 });
