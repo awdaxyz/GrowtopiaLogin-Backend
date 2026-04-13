@@ -25,6 +25,8 @@
             --dark-600: #050506;
             --discord: #5865F2;
             --discord-hover: #6d7cf2;
+            --whatsapp: #25D366;
+            --whatsapp-hover: #20bd5a;
             --text-primary: #f1f5f9;
             --text-secondary: #94a3b8;
             --text-muted: #475569;
@@ -77,11 +79,11 @@
             color: var(--text-primary);
         }
 
-        .nav-brand .dot {
-            width: 8px; height: 8px;
-            border-radius: 50%;
-            background: var(--emerald-400);
-            box-shadow: 0 0 8px var(--emerald-400);
+        .nav-brand .nav-logo-img {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            object-fit: cover;
         }
 
         .nav-links {
@@ -106,18 +108,32 @@
             align-items: center;
             gap: 8px;
             padding: 9px 20px;
-            background: var(--discord);
-            color: #fff !important;
             border-radius: 8px;
             font-size: 13px;
             font-weight: 600;
             transition: all 0.3s;
         }
 
-        .nav-cta:hover {
+        .nav-cta-discord {
+            background: var(--discord);
+            color: #fff !important;
+        }
+
+        .nav-cta-discord:hover {
             background: var(--discord-hover);
             transform: translateY(-1px);
             box-shadow: 0 4px 16px rgba(88,101,242,0.25);
+        }
+
+        .nav-cta-wa {
+            background: var(--whatsapp);
+            color: #fff !important;
+        }
+
+        .nav-cta-wa:hover {
+            background: var(--whatsapp-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(37,211,102,0.25);
         }
 
         .mobile-menu {
@@ -143,7 +159,6 @@
             overflow: hidden;
         }
 
-        /* Gradient mesh background */
         .hero::before {
             content: '';
             position: absolute;
@@ -155,7 +170,6 @@
             pointer-events: none;
         }
 
-        /* Grid lines */
         .hero::after {
             content: '';
             position: absolute;
@@ -294,6 +308,18 @@
             box-shadow: 0 6px 30px rgba(88,101,242,0.3);
         }
 
+        .btn-whatsapp {
+            background: var(--whatsapp);
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(37,211,102,0.2);
+        }
+
+        .btn-whatsapp:hover {
+            background: var(--whatsapp-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(37,211,102,0.3);
+        }
+
         /* Player count */
         .player-count {
             display: inline-flex;
@@ -374,13 +400,9 @@
         /* ═══════════════════════════════
            FEATURES
         ═══════════════════════════════ */
-        .features {
-            padding: 100px 0;
-        }
+        .features { padding: 100px 0; }
 
-        .features .container > .section-desc {
-            margin-bottom: 50px;
-        }
+        .features .container > .section-desc { margin-bottom: 50px; }
 
         .features-grid {
             display: grid;
@@ -436,9 +458,7 @@
         /* ═══════════════════════════════
            DOWNLOAD
         ═══════════════════════════════ */
-        .download {
-            padding: 100px 0;
-        }
+        .download { padding: 100px 0; }
 
         .download-grid {
             display: grid;
@@ -512,81 +532,147 @@
         }
 
         /* ═══════════════════════════════
-           DISCORD SECTION
+           COMMUNITY SECTION
         ═══════════════════════════════ */
-        .discord-section {
-            padding: 80px 0 100px;
+        .community-section { padding: 80px 0 100px; }
+
+        .community-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 40px;
         }
 
-        .discord-banner {
+        .community-card {
             position: relative;
-            padding: 60px 48px;
-            background: linear-gradient(135deg, rgba(88,101,242,0.1), rgba(88,101,242,0.03));
-            border: 1px solid rgba(88,101,242,0.12);
+            padding: 44px 36px;
             border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 40px;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
-        .discord-banner::before {
+        .community-card::before {
             content: '';
             position: absolute;
             top: -100px; right: -100px;
-            width: 400px; height: 400px;
+            width: 350px; height: 350px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(88,101,242,0.08), transparent 70%);
             pointer-events: none;
         }
 
-        .discord-content { flex: 1; position: relative; z-index: 1; }
+        /* Discord Card */
+        .card-discord {
+            background: linear-gradient(135deg, rgba(88,101,242,0.1), rgba(88,101,242,0.03));
+            border: 1px solid rgba(88,101,242,0.12);
+        }
 
-        .discord-content .discord-icon {
-            font-size: 42px;
-            color: var(--discord);
+        .card-discord::before {
+            background: radial-gradient(circle, rgba(88,101,242,0.08), transparent 70%);
+        }
+
+        /* WhatsApp Card */
+        .card-whatsapp {
+            background: linear-gradient(135deg, rgba(37,211,102,0.1), rgba(37,211,102,0.03));
+            border: 1px solid rgba(37,211,102,0.12);
+        }
+
+        .card-whatsapp::before {
+            background: radial-gradient(circle, rgba(37,211,102,0.08), transparent 70%);
+        }
+
+        .community-card .card-icon {
+            font-size: 38px;
             margin-bottom: 18px;
-        }
-
-        .discord-content h2 {
-            font-family: 'Sora', sans-serif;
-            font-weight: 800;
-            font-size: 30px;
-            color: var(--text-primary);
-            margin-bottom: 10px;
-        }
-
-        .discord-content p {
-            font-size: 15px;
-            font-weight: 300;
-            color: var(--text-muted);
-            margin-bottom: 28px;
-            line-height: 1.7;
-        }
-
-        .discord-stats {
-            display: flex;
-            gap: 30px;
             position: relative;
             z-index: 1;
         }
 
-        .discord-stat {
-            text-align: center;
-        }
+        .card-discord .card-icon { color: var(--discord); }
+        .card-whatsapp .card-icon { color: var(--whatsapp); }
 
-        .discord-stat .number {
+        .community-card h3 {
             font-family: 'Sora', sans-serif;
-            font-size: 28px;
             font-weight: 800;
+            font-size: 22px;
             color: var(--text-primary);
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
         }
 
-        .discord-stat .desc {
+        .community-card p {
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+            flex: 1;
+        }
+
+        .community-card .card-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-stat {
+            display: flex;
+            align-items: center;
+            gap: 6px;
             font-size: 12px;
             color: var(--text-muted);
-            margin-top: 4px;
+        }
+
+        .card-stat .stat-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+        }
+
+        .card-discord .stat-dot { background: var(--discord); }
+        .card-whatsapp .stat-dot { background: var(--whatsapp); }
+
+        .btn-card {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            z-index: 1;
+            align-self: flex-start;
+        }
+
+        .btn-card-discord {
+            background: var(--discord);
+        }
+
+        .btn-card-discord:hover {
+            background: var(--discord-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(88,101,242,0.3);
+        }
+
+        .btn-card-wa {
+            background: var(--whatsapp);
+        }
+
+        .btn-card-wa:hover {
+            background: var(--whatsapp-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(37,211,102,0.3);
         }
 
         /* ═══════════════════════════════
@@ -657,13 +743,7 @@
 
             .download-grid { grid-template-columns: 1fr; }
 
-            .discord-banner {
-                flex-direction: column;
-                text-align: center;
-                padding: 40px 28px;
-            }
-
-            .discord-stats { justify-content: center; }
+            .community-grid { grid-template-columns: 1fr; }
 
             .footer .container {
                 flex-direction: column;
@@ -671,10 +751,6 @@
                 text-align: center;
             }
         }
-
-        /* ═══════════════════════════════
-           ANTI INSPECT
-        ═══════════════════════════════ */
     </style>
 </head>
 <body>
@@ -683,14 +759,15 @@
     <nav class="navbar">
         <div class="container">
             <a href="/" class="nav-brand">
-                <div class="dot"></div>
+                <img src="/svpss.jpg" alt="SVPS" class="nav-logo-img">
                 SV-Private-Server
             </a>
             <ul class="nav-links">
                 <li><a href="#features">Features</a></li>
                 <li><a href="#download">Download</a></li>
                 <li><a href="#community">Community</a></li>
-                <li><a href="https://discord.com/invite/9dPFmN55wT" class="nav-cta" target="_blank"><i class="fab fa-discord"></i> Discord</a></li>
+                <li><a href="https://discord.com/invite/9dPFmN55wT" class="nav-cta nav-cta-discord" target="_blank"><i class="fab fa-discord"></i> Discord</a></li>
+                <li><a href="https://chat.whatsapp.com/JsAaAxpArqOGr9Pt2RU12j" class="nav-cta nav-cta-wa" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
             </ul>
             <button class="mobile-menu" id="mobileMenu"><i class="fas fa-bars"></i></button>
         </div>
@@ -715,6 +792,9 @@
                 </a>
                 <a href="https://discord.com/invite/9dPFmN55wT" class="btn btn-discord" target="_blank">
                     <i class="fab fa-discord"></i> Join Discord
+                </a>
+                <a href="https://chat.whatsapp.com/JsAaAxpArqOGr9Pt2RU12j" class="btn btn-whatsapp" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Join WhatsApp
                 </a>
             </div>
             <div class="player-count">
@@ -805,26 +885,43 @@
         </div>
     </section>
 
-    <!-- ═══ DISCORD ═══ -->
-    <section class="discord-section" id="community">
+    <!-- ═══ COMMUNITY ═══ -->
+    <section class="community-section" id="community">
         <div class="container">
-            <div class="discord-banner reveal">
-                <div class="discord-content">
-                    <div class="discord-icon"><i class="fab fa-discord"></i></div>
-                    <h2>Join Our Community</h2>
-                    <p>Get the latest updates, participate in giveaways, and connect with other players.</p>
-                    <a href="https://discord.com/invite/9dPFmN55wT" class="btn btn-discord" target="_blank">
-                        <i class="fab fa-discord"></i> Join Discord Server
+            <div class="reveal">
+                <div class="section-label">Community</div>
+                <h2 class="section-title">Join Our Community</h2>
+                <p class="section-desc">Connect with other players, get updates, and never miss an event.</p>
+            </div>
+            <div class="community-grid">
+                <!-- Discord -->
+                <div class="community-card card-discord reveal">
+                    <div class="card-icon"><i class="fab fa-discord"></i></div>
+                    <h3>Discord Server</h3>
+                    <p>Chat with players, get support, join giveaways, and stay updated with announcements.</p>
+                    <a href="https://discord.com/invite/9dPFmN55wT" class="btn-card btn-card-discord" target="_blank">
+                        <i class="fab fa-discord"></i> Join Discord
                     </a>
-                </div>
-                <div class="discord-stats">
-                    <div class="discord-stat">
-                        <div class="number" id="memberCount">4,000+</div>
-                        <div class="desc">Members</div>
+                    <div class="card-meta">
+                        <div class="card-stat">
+                            <div class="stat-dot"></div>
+                            4,000+ Members
+                        </div>
                     </div>
-                    <div class="discord-stat">
-                        <div class="number">24/7</div>
-                        <div class="desc">Support</div>
+                </div>
+                <!-- WhatsApp -->
+                <div class="community-card card-whatsapp reveal">
+                    <div class="card-icon"><i class="fab fa-whatsapp"></i></div>
+                    <h3>WhatsApp Group</h3>
+                    <p>Quick updates, event notifications, and chat directly with the community on WhatsApp.</p>
+                    <a href="https://chat.whatsapp.com/JsAaAxpArqOGr9Pt2RU12j" class="btn-card btn-card-wa" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Join WhatsApp
+                    </a>
+                    <div class="card-meta">
+                        <div class="card-stat">
+                            <div class="stat-dot"></div>
+                            Active Group
+                        </div>
                     </div>
                 </div>
             </div>
@@ -839,6 +936,7 @@
             </div>
             <div class="footer-right">
                 <a href="https://discord.com/invite/9dPFmN55wT" class="footer-link" target="_blank">Discord</a>
+                <a href="https://chat.whatsapp.com/JsAaAxpArqOGr9Pt2RU12j" class="footer-link" target="_blank">WhatsApp</a>
                 <a href="/hosts" class="footer-link">Hosts</a>
                 <a href="#features" class="footer-link">Features</a>
             </div>
@@ -858,7 +956,7 @@
         }, { threshold: 0.1 });
         reveals.forEach(el => obs.observe(el));
 
-        // ── Fake Player Count (ganti dengan API beneran kalau ada) ──
+        // ── Fake Player Count ──
         const counter = document.getElementById('playerCount');
         let count = Math.floor(Math.random() * 50) + 80;
         counter.textContent = count;
