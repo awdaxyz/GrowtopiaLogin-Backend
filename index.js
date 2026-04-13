@@ -18,6 +18,7 @@ app.use(function (req, res, next) {
 });
 
 app.use(express.json());
+app.use(express.static(__dirname + '/public'));
 
 app.all('/android', (req, res) => {
     res.sendFile(__dirname + '/public/html/ada.html');
