@@ -1,110 +1,278 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SVPS</title>
+    <title>SVPS - iOS Setup</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Sora:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --emerald-300: #34d399;
+            --emerald-400: #10b981;
+            --emerald-500: #059669;
+            --dark-500: #08080a;
+            --dark-600: #050506;
+            --discord: #5865F2;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #475569;
+            --border: rgba(16,185,129,0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: 'Comic Sans MS', 'Arial', sans-serif;
-            background: #121212;
-            color: #ffffff;
-            margin: 0;
-            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            background: var(--dark-600);
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 500px 400px at 30% 30%, rgba(16,185,129,0.05), transparent),
+                radial-gradient(ellipse 400px 400px at 70% 70%, rgba(88,101,242,0.03), transparent);
+            pointer-events: none;
+        }
+
+        .card {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 480px;
+            background: rgba(16,16,22,0.6);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 40px 32px;
+            backdrop-filter: blur(10px);
+            animation: fadeUp 0.6s backwards;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .header .icon {
+            width: 56px; height: 56px;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
+            border-radius: 14px;
+            background: rgba(16,185,129,0.08);
+            color: var(--emerald-400);
+            font-size: 26px;
+            margin-bottom: 16px;
         }
 
-        .container {
-            text-align: center;
+        .header h1 {
+            font-family: 'Sora', sans-serif;
+            font-weight: 800;
+            font-size: 22px;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .header p {
+            font-size: 13px;
+            font-weight: 300;
+            color: var(--text-muted);
+        }
+
+        /* Section Label */
+        .section-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--emerald-500);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 16px; height: 2px;
+            background: var(--emerald-500);
+            border-radius: 2px;
+        }
+
+        /* Code Block */
+        .code-box {
+            position: relative;
+            background: var(--dark-500);
+            border: 1px solid var(--border);
+            border-radius: 12px;
             padding: 20px;
-            background: rgba(20, 20, 20, 0.9);
-            border: 5px solid #ffffff;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-            max-width: 600px;
+            margin-bottom: 14px;
         }
 
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            color: #ffffff;
-            text-shadow: 2px 2px 4px #000000;
+        .code-content {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            line-height: 1.9;
+            color: var(--emerald-300);
+            white-space: pre;
+            overflow-x: auto;
         }
 
-        p {
-            font-size: 1.2em;
-            line-height: 1.6;
-            margin: 10px 0;
+        .code-tag {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            background: rgba(255,255,255,0.04);
+            padding: 3px 10px;
+            border-radius: 6px;
         }
 
-        ul {
-            text-align: left;
-            padding: 0;
-            list-style-type: none;
-        }
-
-        li {
-            background: rgba(255, 255, 255, 0.1);
-            margin: 5px 0;
-            padding: 10px;
-            border-radius: 5px;
-            color: #ffffff;
-            white-space: pre-wrap; /* Preserve spaces and newlines */
-        }
-
-        a {
-            color: #00ffff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-            a:hover {
-                text-decoration: underline;
-            }
-
-        .footer {
-            margin-top: 20px;
-            font-size: 0.9em;
-        }
-
-        button {
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid #ffffff;
-            color: #ffffff;
-            padding: 10px 20px;
-            font-size: 1em;
-            border-radius: 5px;
+        /* Copy Button */
+        .copy-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--emerald-400), var(--emerald-500));
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
             cursor: pointer;
-            transition: background 0.3s, transform 0.2s;
+            transition: all 0.3s;
+            margin-bottom: 28px;
         }
 
-            button:hover {
-                background: rgba(255, 255, 255, 0.4);
-                transform: scale(1.05);
-            }
-
-        .message {
-            margin-top: 10px;
-            font-size: 1em;
-            color: #00ff00;
-            display: none;
+        .copy-btn:hover {
+            box-shadow: 0 4px 25px rgba(16,185,129,0.25);
+            transform: translateY(-1px);
         }
 
-            .message.error {
-                color: #ff0000;
-            }
+        .copy-btn.copied {
+            background: var(--discord);
+        }
+
+        /* Steps */
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 14px 16px;
+            background: rgba(8,8,10,0.6);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+        }
+
+        .step-num {
+            width: 28px; height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background: rgba(16,185,129,0.1);
+            color: var(--emerald-400);
+            font-family: 'Sora', sans-serif;
+            font-size: 12px;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .step-text strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Back */
+        .back {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .back:hover { color: var(--emerald-300); }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: var(--emerald-500);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>iOS<br/>(Surge 5)</h1>
-        <p>Copy & Paste</p>
-        <ul>
-            <li id="text-to-copy">[General]
+
+    <div class="toast" id="toast"><i class="fas fa-check"></i> Copied to clipboard!</div>
+
+    <div class="card">
+        <div class="header">
+            <div class="icon"><i class="fab fa-apple"></i></div>
+            <h1>iOS Setup</h1>
+            <p>Connect using Surge 5</p>
+        </div>
+
+        <!-- Surge Config -->
+        <div class="section-label">Surge 5 Configuration</div>
+        <div class="code-box">
+            <div class="code-tag">surge.conf</div>
+            <div class="code-content" id="surgeConfig">[General]
 
 [Rule]
 FINAL,DIRECT
@@ -113,26 +281,67 @@ FINAL,DIRECT
 growtopia1.com = 46.247.109.11
 growtopia2.com = 46.247.109.11
 www.growtopia1.com = 46.247.109.11
-www.growtopia2.com = 46.247.109.11</li>
-        </ul>
-        <button id="copy-button">Copy to Clipboard</button>
-        <div class="message" id="message">Copied to clipboard!</div>
-        <div class="message error" id="error-message">Failed to copy!</div>
+www.growtopia2.com = 46.247.109.11</div>
+        </div>
+
+        <button class="copy-btn" id="copyBtn" onclick="copyConfig()">
+            <i class="fas fa-copy"></i> Copy Configuration
+        </button>
+
+        <!-- Steps -->
+        <div class="section-label">How to Setup</div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-text">Download <strong>Surge 5</strong> from the App Store</div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-text">Open Surge, go to <strong>Profile</strong> and create a new config</div>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-text"><strong>Paste</strong> the configuration above into the config file</div>
+            </div>
+            <div class="step">
+                <div class="step-num">4</div>
+                <div class="step-text">Enable the profile, then open <strong>Growtopia</strong> and play!</div>
+            </div>
+        </div>
+
+        <a href="/" class="back"><i class="fas fa-arrow-left"></i> Back to Home</a>
     </div>
 
-    <script>document.getElementById('copy-button').addEventListener('click', function () {
-            const textToCopy = document.getElementById('text-to-copy').innerText;
-            navigator.clipboard.writeText(textToCopy)
-                .then(() => {
-                    const message = document.getElementById('message');
-                    message.style.display = 'block';
-                    setTimeout(() => message.style.display = 'none', 2000);
-                })
-                .catch(() => {
-                    const errorMessage = document.getElementById('error-message');
-                    errorMessage.style.display = 'block';
-                    setTimeout(() => errorMessage.style.display = 'none', 2000);
-                });
-        });</script>
+    <script>
+        function copyConfig() {
+            const text = document.getElementById('surgeConfig').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.getElementById('copyBtn');
+                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                btn.classList.add('copied');
+
+                const toast = document.getElementById('toast');
+                toast.classList.add('show');
+
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fas fa-copy"></i> Copy Configuration';
+                    btn.classList.remove('copied');
+                    toast.classList.remove('show');
+                }, 2000);
+            });
+        }
+
+        // Anti inspect
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.key === 'F12' ||
+                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) ||
+                (e.ctrlKey && e.shiftKey && (e.key === 'J' || e.key === 'j')) ||
+                (e.ctrlKey && (e.key === 'U' || e.key === 'u'))) {
+                e.preventDefault();
+            }
+        });
+    </script>
+
 </body>
 </html>
