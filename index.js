@@ -35,7 +35,7 @@ app.all('/file', (req, res) => {
     res.redirect('https://www.mediafire.com/file/2bi5h8f24gyg8ud/svps-hosts.txt/file');
 });
 app.all('/', (req, res) => {
-    res.redirect('https://linktr.ee/sv.ps');
+   res.sendFile(__dirname + '/public/html/main.html');
 });
 
 app.listen(5000, function () {
