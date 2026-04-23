@@ -956,15 +956,76 @@
         }, { threshold: 0.1 });
         reveals.forEach(el => obs.observe(el));
 
-        // ── Fake Player Count ──
-        const counter = document.getElementById('playerCount');
-        let count = Math.floor(Math.random() * 50) + 80;
-        counter.textContent = count;
-        setInterval(() => {
-            count += Math.floor(Math.random() * 5) - 2;
-            if (count < 50) count = 50;
-            counter.textContent = count;
-        }, 5000);
+        // ── Real Player Count ──
+const counter = document.getElementById('playerCount');
+const statusBadge = document.querySelector('.hero-badge');
+
+async function fetchPlayerCount() {
+    try {
+        const res = await fetch('/api/players', { 
+            cache: 'no-store',
+            signal: AbortSignal.timeout(6000)
+        });
+        
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        
+        // Animasi smooth ke angka baru
+        const current = parseInt(counter.textContent) || 0;
+        animateCount(current, data.online);
+        
+        // Update status badge
+        updateStatusBadge(data.status);
+        
+    } catch (err) {
+        console.error('Failed to fetch player count:', err.message);
+        counter.textContent = '—';
+        updateStatusBadge('unknown');
+    }
+}
+
+function updateStatusBadge(status) {
+    if (!statusBadge) return;
+    
+    if (status === 'online') {
+        statusBadge.innerHTML = '<div class="pulse"></div> Server Online';
+        statusBadge.style.color = 'var(--emerald-400)';
+        statusBadge.style.background = 'rgba(16,185,129,0.08)';
+        statusBadge.style.borderColor = 'rgba(16,185,129,0.12)';
+    } else if (status === 'offline') {
+        statusBadge.innerHTML = '<div class="pulse" style="background:#ef4444;box-shadow:0 0 10px #ef4444"></div> Server Offline';
+        statusBadge.style.color = '#ef4444';
+        statusBadge.style.background = 'rgba(239,68,68,0.08)';
+        statusBadge.style.borderColor = 'rgba(239,68,68,0.12)';
+    } else {
+        statusBadge.innerHTML = '<div class="pulse" style="background:#94a3b8"></div> Connecting...';
+        statusBadge.style.color = '#94a3b8';
+        statusBadge.style.background = 'rgba(148,163,184,0.08)';
+        statusBadge.style.borderColor = 'rgba(148,163,184,0.12)';
+    }
+}
+
+function animateCount(from, to) {
+    const duration = 800;
+    const start = performance.now();
+    
+    function update(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+        const current = Math.floor(from + (to - from) * eased);
+        counter.textContent = current;
+        
+        if (progress < 1) requestAnimationFrame(update);
+    }
+    
+    requestAnimationFrame(update);
+}
+
+// Fetch pertama kali
+fetchPlayerCount();
+
+// Update tiap 10 detik
+setInterval(fetchPlayerCount, 10000);
 
         // ── Mobile Menu Toggle ──
         document.getElementById('mobileMenu').addEventListener('click', () => {
