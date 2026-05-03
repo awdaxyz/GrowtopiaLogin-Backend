@@ -63,7 +63,7 @@
         /* Header */
         .header {
             text-align: center;
-            margin-bottom: 32px;
+            margin-bottom: 28px;
         }
 
         .header .icon {
@@ -92,6 +92,66 @@
             color: var(--text-muted);
         }
 
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 4px;
+            padding: 4px;
+            background: var(--dark-500);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 28px;
+        }
+
+        .tab {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            padding: 11px 10px;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            color: var(--text-muted);
+            font-family: 'Outfit', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+            white-space: nowrap;
+        }
+
+        .tab:hover:not(.active) { color: var(--text-secondary); }
+
+        .tab.active {
+            background: rgba(16,185,129,0.1);
+            color: var(--emerald-300);
+            box-shadow: 0 0 0 1px rgba(16,185,129,0.15);
+        }
+
+        .tab .badge {
+            font-size: 8px;
+            font-weight: 800;
+            padding: 2px 6px;
+            background: var(--emerald-500);
+            color: #fff;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .tab-content { display: none; }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.35s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         /* Section Label */
         .section-label {
             font-size: 10px;
@@ -111,6 +171,30 @@
             background: var(--emerald-500);
             border-radius: 2px;
         }
+
+        /* Info Box */
+        .info-box {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px 16px;
+            background: rgba(16,185,129,0.05);
+            border: 1px solid rgba(16,185,129,0.15);
+            border-radius: 10px;
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+            font-size: 12px;
+            line-height: 1.55;
+        }
+
+        .info-box i {
+            color: var(--emerald-400);
+            font-size: 14px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .info-box strong { color: var(--text-primary); font-weight: 600; }
 
         /* Code Block */
         .code-box {
@@ -145,8 +229,8 @@
             border-radius: 6px;
         }
 
-        /* Copy Button */
-        .copy-btn {
+        /* Action Button (copy & download share base) */
+        .action-btn {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -161,16 +245,17 @@
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
+            text-decoration: none;
             transition: all 0.3s;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
         }
 
-        .copy-btn:hover {
+        .action-btn:hover {
             box-shadow: 0 4px 25px rgba(16,185,129,0.25);
             transform: translateY(-1px);
         }
 
-        .copy-btn.copied {
+        .action-btn.copied {
             background: var(--discord);
         }
 
@@ -183,7 +268,7 @@
             background: rgba(8,8,10,0.6);
             border: 1px solid var(--border);
             border-radius: 10px;
-            margin-bottom: 16px;
+            margin-bottom: 24px;
         }
 
         .path-box .path-icon {
@@ -296,52 +381,95 @@
         <div class="header">
             <div class="icon"><i class="fab fa-windows"></i></div>
             <h1>Windows Setup</h1>
-            <p>Edit your hosts file to connect</p>
+            <p>Choose how you want to connect</p>
         </div>
 
-        <!-- Hosts Content -->
-        <div class="section-label">Hosts File Content</div>
-        <div class="code-box">
-            <div class="code-tag">hosts</div>
-            <div class="code-content" id="hostsCode">46.247.109.11 www.growtopia1.com
+        <!-- Tab Switcher -->
+        <div class="tabs">
+            <button class="tab active" data-tab="auto" onclick="switchTab('auto')">
+                <i class="fas fa-bolt"></i> Auto Setup
+                <span class="badge">Easy</span>
+            </button>
+            <button class="tab" data-tab="manual" onclick="switchTab('manual')">
+                <i class="fas fa-cog"></i> Manual
+            </button>
+        </div>
+
+        <!-- ============ AUTO SETUP ============ -->
+        <div class="tab-content active" id="auto">
+            <div class="info-box">
+                <i class="fas fa-bolt"></i>
+                <div>Download <strong>SVPS_Auto-Setup.bat</strong> and run it as Administrator. The script automatically adds the required entries to your hosts file — no manual editing needed.</div>
+            </div>
+
+            <a href="https://www.mediafire.com/file/4sbrtmfmhm1gk0o/SVPS_Auto-Setup.bat/file" target="_blank" rel="noopener" class="action-btn">
+                <i class="fas fa-download"></i> Download Auto-Setup.bat
+            </a>
+
+            <div class="section-label">How to Use</div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-text"><strong>Download</strong> the <code style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--emerald-300)">SVPS_Auto-Setup.bat</code> file from MediaFire</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-text"><strong>Right-click</strong> the file and select <strong>Run as Administrator</strong></div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-text">If Windows SmartScreen appears, click <strong>More Info → Run Anyway</strong></div>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-text">Wait for the script to finish, then <strong>open Growtopia</strong> and play!</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============ MANUAL SETUP ============ -->
+        <div class="tab-content" id="manual">
+            <div class="section-label">Hosts File Content</div>
+            <div class="code-box">
+                <div class="code-tag">hosts</div>
+                <div class="code-content" id="hostsCode">46.247.109.11 www.growtopia1.com
 46.247.109.11 www.growtopia2.com
 46.247.109.11 growtopia1.com
 46.247.109.11 growtopia2.com</div>
-        </div>
+            </div>
 
-        <button class="copy-btn" id="copyBtn" onclick="copyHosts()">
-            <i class="fas fa-copy"></i> Copy to Clipboard
-        </button>
+            <button class="action-btn" id="copyBtn" onclick="copyHosts()">
+                <i class="fas fa-copy"></i> Copy to Clipboard
+            </button>
 
-        <!-- File Path -->
-        <div class="section-label">File Location</div>
-        <div class="path-box">
-            <div class="path-icon"><i class="fas fa-folder-open"></i></div>
-            <code>C:\Windows\System32\drivers\etc\hosts</code>
-        </div>
+            <div class="section-label">File Location</div>
+            <div class="path-box">
+                <div class="path-icon"><i class="fas fa-folder-open"></i></div>
+                <code>C:\Windows\System32\drivers\etc\hosts</code>
+            </div>
 
-        <!-- Steps -->
-        <div class="section-label">How to Setup</div>
-        <div class="steps">
-            <div class="step">
-                <div class="step-num">1</div>
-                <div class="step-text">Open <strong>Notepad</strong> as Administrator</div>
-            </div>
-            <div class="step">
-                <div class="step-num">2</div>
-                <div class="step-text">Click <strong>File → Open</strong>, navigate to the path above</div>
-            </div>
-            <div class="step">
-                <div class="step-num">3</div>
-                <div class="step-text">Change file filter to <strong>All Files (*.*)</strong> to see the hosts file</div>
-            </div>
-            <div class="step">
-                <div class="step-num">4</div>
-                <div class="step-text"><strong>Paste</strong> the hosts content at the bottom of the file</div>
-            </div>
-            <div class="step">
-                <div class="step-num">5</div>
-                <div class="step-text"><strong>Save</strong> the file, open Growtopia, and play!</div>
+            <div class="section-label">How to Setup</div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-text">Open <strong>Notepad</strong> as Administrator</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-text">Click <strong>File → Open</strong>, navigate to the path above</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-text">Change file filter to <strong>All Files (*.*)</strong> to see the hosts file</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-text"><strong>Paste</strong> the hosts content at the bottom of the file</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">5</div>
+                    <div class="step-text"><strong>Save</strong> the file, open Growtopia, and play!</div>
+                </div>
             </div>
         </div>
 
@@ -349,6 +477,13 @@
     </div>
 
     <script>
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelector(`.tab[data-tab="${tabName}"]`).classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
         function copyHosts() {
             const text = document.getElementById('hostsCode').textContent;
             navigator.clipboard.writeText(text).then(() => {
