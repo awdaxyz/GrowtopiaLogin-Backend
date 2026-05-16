@@ -233,7 +233,33 @@
             background-clip: text;
             animation: shimmer 5s ease-in-out infinite;
         }
+        /* ─── Since 2022 elegant divider ─── */
+.hero-since {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 18px;
+    font-family: 'Sora', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    animation: fadeUp 0.6s 0.3s backwards;
+}
 
+.hero-since::before,
+.hero-since::after {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(148,163,184,0.3), transparent);
+}
+
+.hero-since .year {
+    color: var(--emerald-400);
+    font-weight: 600;
+}
         @keyframes shimmer {
             0%, 100% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -750,6 +776,16 @@
                 gap: 16px;
                 text-align: center;
             }
+            .hero-since {
+    font-size: 10px;
+    letter-spacing: 3px;
+    gap: 10px;
+}
+
+.hero-since::before,
+.hero-since::after {
+    width: 20px;
+}
         }
     </style>
 </head>
@@ -783,6 +819,9 @@
             <h1 class="hero-title">
                 SV-Private<span class="gradient">-Server</span>
             </h1>
+            <div class="hero-since">
+    <span><span class="year">Since 2022</span> · Still Standing</span>
+</div>
             <p class="hero-desc">
                 The best Growtopia Private Server with exclusive features, exciting gameplay, and an active community. Join now!
             </p>
