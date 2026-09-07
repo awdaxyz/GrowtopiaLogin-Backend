@@ -3,18 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SVPS - Android Download</title>
+    <title>SVPS - Android Setup</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Sora:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
             --emerald-300: #34d399;
             --emerald-400: #10b981;
             --emerald-500: #059669;
-            --emerald-600: #047857;
-            --dark-100: #1c1c22;
-            --dark-200: #16161b;
-            --dark-300: #111115;
             --dark-500: #08080a;
             --dark-600: #050506;
             --discord: #5865F2;
@@ -67,7 +63,7 @@
         /* Header */
         .header {
             text-align: center;
-            margin-bottom: 32px;
+            margin-bottom: 28px;
         }
 
         .header .icon {
@@ -96,6 +92,66 @@
             color: var(--text-muted);
         }
 
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 4px;
+            padding: 4px;
+            background: var(--dark-500);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 28px;
+        }
+
+        .tab {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            padding: 11px 10px;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            color: var(--text-muted);
+            font-family: 'Outfit', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+            white-space: nowrap;
+        }
+
+        .tab:hover:not(.active) { color: var(--text-secondary); }
+
+        .tab.active {
+            background: rgba(16,185,129,0.1);
+            color: var(--emerald-300);
+            box-shadow: 0 0 0 1px rgba(16,185,129,0.15);
+        }
+
+        .tab .badge {
+            font-size: 8px;
+            font-weight: 800;
+            padding: 2px 6px;
+            background: var(--emerald-500);
+            color: #fff;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .tab-content { display: none; }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.35s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         /* Section Label */
         .section-label {
             font-size: 10px;
@@ -116,83 +172,169 @@
             border-radius: 2px;
         }
 
-        /* Option Cards */
-        .options {
+        /* Info Box */
+        .info-box {
             display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 28px;
-        }
-
-        .option {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 16px 18px;
-            background: rgba(8,8,10,0.6);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            text-decoration: none;
-            color: var(--text-secondary);
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .option:hover {
-            border-color: rgba(16,185,129,0.2);
-            background: rgba(16,185,129,0.04);
-            transform: translateX(4px);
-        }
-
-        .option .opt-icon {
-            width: 40px; height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px 16px;
+            background: rgba(16,185,129,0.05);
+            border: 1px solid rgba(16,185,129,0.15);
             border-radius: 10px;
-            font-size: 16px;
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+            font-size: 12px;
+            line-height: 1.55;
+        }
+
+        .info-box i {
+            color: var(--emerald-400);
+            font-size: 14px;
+            margin-top: 2px;
             flex-shrink: 0;
         }
 
-        .opt-icon.green { background: rgba(16,185,129,0.1); color: var(--emerald-400); }
-        .opt-icon.blue { background: rgba(88,101,242,0.1); color: var(--discord); }
-        .opt-icon.amber { background: rgba(245,158,11,0.1); color: #f59e0b; }
-        .opt-icon.rose { background: rgba(244,63,94,0.1); color: #f43f5e; }
+        .info-box strong { color: var(--text-primary); font-weight: 600; }
 
-        .opt-info { flex: 1; }
-
-        .opt-info h3 {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 2px;
+        /* Code Block */
+        .code-box {
+            position: relative;
+            background: var(--dark-500);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 14px;
         }
 
-        .opt-info p {
-            font-size: 11px;
-            font-weight: 300;
-            color: var(--text-muted);
-        }
-
-        .opt-arrow {
-            color: var(--text-muted);
+        .code-content {
+            font-family: 'JetBrains Mono', monospace;
             font-size: 12px;
+            line-height: 2;
+            color: var(--emerald-300);
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+        .code-tag {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            background: rgba(255,255,255,0.04);
+            padding: 3px 10px;
+            border-radius: 6px;
+        }
+
+        /* Action Button (copy & download share base) */
+        .action-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--emerald-400), var(--emerald-500));
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
             transition: all 0.3s;
+            margin-bottom: 24px;
         }
 
-        .option:hover .opt-arrow {
+        .action-btn:hover {
+            box-shadow: 0 4px 25px rgba(16,185,129,0.25);
+            transform: translateY(-1px);
+        }
+
+        .action-btn.copied {
+            background: var(--discord);
+        }
+
+        /* Path Info */
+        .path-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            background: rgba(8,8,10,0.6);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin-bottom: 24px;
+        }
+
+        .path-box .path-icon {
+            width: 32px; height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background: rgba(245,158,11,0.1);
+            color: #f59e0b;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .path-box code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--text-secondary);
+            word-break: break-all;
+        }
+
+        /* Steps */
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 14px 16px;
+            background: rgba(8,8,10,0.6);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+        }
+
+        .step-num {
+            width: 28px; height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background: rgba(16,185,129,0.1);
             color: var(--emerald-400);
-            transform: translateX(3px);
+            font-family: 'Sora', sans-serif;
+            font-size: 12px;
+            font-weight: 800;
+            flex-shrink: 0;
         }
 
-        /* Divider */
-        .divider {
-            height: 1px;
-            background: var(--border);
-            margin: 4px 0 24px;
+        .step-text {
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            line-height: 1.5;
         }
 
-        /* Back link */
+        .step-text strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Back */
         .back {
             display: flex;
             align-items: center;
@@ -202,7 +344,6 @@
             color: var(--text-muted);
             text-decoration: none;
             transition: color 0.3s;
-            margin-top: 8px;
         }
 
         .back:hover { color: var(--emerald-300); }
@@ -234,83 +375,131 @@
 </head>
 <body>
 
-    <div class="toast" id="toast"><i class="fas fa-check"></i> Link copied!</div>
+    <div class="toast" id="toast"><i class="fas fa-check"></i> Copied to clipboard!</div>
 
     <div class="card">
         <div class="header">
             <div class="icon"><i class="fab fa-android"></i></div>
-            <h1>Android Download</h1>
-            <p>Choose your preferred method to connect</p>
+            <h1>Android Setup</h1>
+            <p>Choose how you want to connect</p>
         </div>
 
-        <!-- Connection Method -->
-        <div class="section-label">Connection Method</div>
-        <div class="options">
-<!-- ==== SVPS Connect app (ganti href dengan link APK yang kamu host) ==== -->
-<!-- ==== SVPS Connect app (ganti href dengan link APK-mu) ==== -->
-<a href="https://www.mediafire.com/file/agrlo8ymhwusa29/SVPS-Connect.apk/file" class="option" target="_blank"
-   style="border:1px solid rgba(16,185,129,0.3); background:rgba(16,185,129,0.06);">
-    <div class="opt-icon green"><i class="fas fa-bolt"></i></div>
-    <div class="opt-info">
-        <h3 style="display:flex; align-items:center; flex-wrap:wrap; gap:8px;">
-            <span>SVPSConnect</span>
-            <span style="font-size:9px; font-weight:700; letter-spacing:0.5px; color:#34d399; background:rgba(16,185,129,0.14); border:1px solid rgba(16,185,129,0.28); padding:3px 8px; border-radius:20px; white-space:nowrap;">RECOMMENDED</span>
-        </h3>
-        <p>Official one-tap VPN app — auto-redirects Real Growtopia to SVPS, no setup</p>
-    </div>
-    <div class="opt-arrow"><i class="fas fa-download"></i></div>
-</a>
-            <a href="/file" class="option">
-                <div class="opt-icon green"><i class="fas fa-globe"></i></div>
-                <div class="opt-info">
-                    <h3>Virtual Hosts</h3>
-                    <p>Download hosts file for VPN-based connection</p>
-                </div>
-                <div class="opt-arrow"><i class="fas fa-chevron-right"></i></div>
+        <!-- Tab Switcher -->
+        <div class="tabs">
+            <button class="tab active" data-tab="auto" onclick="switchTab('auto')">
+                <i class="fas fa-bolt"></i> Auto Setup
+                <span class="badge">Easy</span>
+            </button>
+            <button class="tab" data-tab="manual" onclick="switchTab('manual')">
+                <i class="fas fa-cog"></i> Manual
+            </button>
+        </div>
+
+        <!-- ============ AUTO SETUP ============ -->
+        <div class="tab-content active" id="auto">
+            <div class="info-box">
+                <i class="fas fa-bolt"></i>
+                <div>Download <strong>SVPSConnect</strong> and install it. The app auto-redirects Real Growtopia to SVPS with a single tap — no hosts editing needed.</div>
+            </div>
+
+            <a href="https://www.mediafire.com/file/gxr84ue6uepy94i/SVPS-Connect.apk/file" target="_blank" rel="noopener" class="action-btn">
+                <i class="fas fa-download"></i> Download SVPSConnect.apk
             </a>
-            <div class="option" id="copyPT" onclick="copyLink()">
-                <div class="opt-icon blue"><i class="fas fa-shield-halved"></i></div>
-                <div class="opt-info">
-                    <h3>PowerTunnel / Hosts Go</h3>
-                    <p>Copy subscription URL to clipboard</p>
+
+            <div class="section-label">How to Use</div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-text"><strong>Download</strong> the <code style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--emerald-300)">SVPSConnect.apk</code> file from MediaFire</div>
                 </div>
-                <div class="opt-arrow"><i class="fas fa-copy"></i></div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-text"><strong>Open</strong> the APK and install it. If prompted, allow <strong>Install from unknown sources</strong></div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-text"><strong>Open SVPSConnect</strong> and tap <strong>Connect</strong> (accept the VPN request if asked)</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-text">Once connected, <strong>open Growtopia</strong> and play!</div>
+                </div>
             </div>
         </div>
 
-        <div class="divider"></div>
+        <!-- ============ MANUAL SETUP ============ -->
+        <div class="tab-content" id="manual">
+            <div class="info-box">
+                <i class="fas fa-circle-info"></i>
+                <div>Prefer no app? Apply these entries with a hosts tool like <strong>PowerTunnel</strong> or <strong>Hosts Go</strong> to redirect Growtopia to SVPS.</div>
+            </div>
 
-        <!-- APK Downloads -->
-        <div class="section-label">APK Download</div>
-        <div class="options">
-            <a href="https://www.mediafire.com/file/7q78cxa5v2kxhqk/SVPS+5.48+(64+bit).apk/file" class="option" target="_blank">
-                <div class="opt-icon amber"><i class="fas fa-microchip"></i></div>
-                <div class="opt-info">
-                    <h3>SVPS APK — 64-bit</h3>
-                    <p>arm64-v8a • Recommended for most devices</p>
+            <div class="section-label">Hosts Entries</div>
+            <div class="code-box">
+                <div class="code-tag">hosts</div>
+                <div class="code-content" id="hostsCode">45.142.115.57 www.growtopia1.com
+45.142.115.57 www.growtopia2.com
+45.142.115.57 growtopia1.com
+45.142.115.57 growtopia2.com</div>
+            </div>
+
+            <button class="action-btn" id="copyBtn" onclick="copyHosts()">
+                <i class="fas fa-copy"></i> Copy to Clipboard
+            </button>
+
+            <div class="section-label">Subscription URL</div>
+            <div class="path-box">
+                <div class="path-icon"><i class="fas fa-link"></i></div>
+                <code>https://svps-website.vercel.app/hosts</code>
+            </div>
+
+            <div class="section-label">How to Setup</div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-text">Install <strong>PowerTunnel</strong> or <strong>Hosts Go</strong> from the Play Store</div>
                 </div>
-                <div class="opt-arrow"><i class="fas fa-download"></i></div>
-            </a>
-            <a href="https://www.mediafire.com/file/x09sf0jbm8alv84/SVPS+5.48+(32+bit).apk/file" class="option" target="_blank">
-                <div class="opt-icon rose"><i class="fas fa-microchip"></i></div>
-                <div class="opt-info">
-                    <h3>SVPS APK — 32-bit</h3>
-                    <p>armeabi-v7a • For older devices</p>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-text"><strong>Copy</strong> the hosts entries above, or import them from the subscription URL</div>
                 </div>
-                <div class="opt-arrow"><i class="fas fa-download"></i></div>
-            </a>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-text"><strong>Paste / add</strong> the entries into the app's hosts list</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-text"><strong>Enable</strong> the tunnel, then open <strong>Growtopia</strong> and play!</div>
+                </div>
+            </div>
         </div>
 
         <a href="/" class="back"><i class="fas fa-arrow-left"></i> Back to Home</a>
     </div>
 
     <script>
-        function copyLink() {
-            const url = window.location.origin + '/hosts';
-            navigator.clipboard.writeText(url).then(() => {
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelector(`.tab[data-tab="${tabName}"]`).classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        function copyHosts() {
+            const text = document.getElementById('hostsCode').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.getElementById('copyBtn');
+                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                btn.classList.add('copied');
+
                 const toast = document.getElementById('toast');
                 toast.classList.add('show');
-                setTimeout(() => toast.classList.remove('show'), 2000);
+
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fas fa-copy"></i> Copy to Clipboard';
+                    btn.classList.remove('copied');
+                    toast.classList.remove('show');
+                }, 2000);
             });
         }
 
