@@ -44,7 +44,7 @@ app.get('/api/players', async (req, res) => {
         const controller = new AbortController();
         const timeout = setTimeout(() => controller.abort(), 5000);
         
-        const response = await fetch('http://37.114.34.136:3001/api/players', {
+        const response = await fetch('http://45.142.115.57:3001/api/players', {
             signal: controller.signal
         });
         
