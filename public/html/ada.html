@@ -281,6 +281,19 @@
             color: #f59e0b;
             font-size: 14px;
             flex-shrink: 0;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .path-box .path-icon:hover { background: rgba(245,158,11,0.2); }
+        .path-box .path-icon:active { transform: scale(0.9); }
+
+        .path-box .path-icon.copied {
+            background: rgba(16,185,129,0.15);
+            color: var(--emerald-300);
         }
 
         .path-box code {
@@ -454,8 +467,8 @@
 
             <div class="section-label">Subscription URL</div>
             <div class="path-box">
-                <div class="path-icon"><i class="fas fa-link"></i></div>
-                <code>https://svps.website/hosts</code>
+                <button type="button" class="path-icon" id="urlCopyBtn" onclick="copySubUrl()" title="Copy URL" aria-label="Copy subscription URL"><i class="fas fa-link"></i></button>
+                <code id="subUrl">https://svps.website/hosts</code>
             </div>
 
             <div class="section-label">How to Setup</div>
@@ -506,6 +519,44 @@
                     toast.classList.remove('show');
                 }, 2000);
             });
+        }
+
+        function copySubUrl() {
+            const text = document.getElementById('subUrl').textContent.trim();
+            const btn = document.getElementById('urlCopyBtn');
+
+            const done = () => {
+                btn.innerHTML = '<i class="fas fa-check"></i>';
+                btn.classList.add('copied');
+
+                const toast = document.getElementById('toast');
+                toast.classList.add('show');
+
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fas fa-link"></i>';
+                    btn.classList.remove('copied');
+                    toast.classList.remove('show');
+                }, 2000);
+            };
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
+            } else {
+                fallbackCopy(text, done);
+            }
+        }
+
+        function fallbackCopy(text, done) {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.setAttribute('readonly', '');
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            ta.setSelectionRange(0, text.length);
+            try { document.execCommand('copy'); done(); } catch (e) {}
+            document.body.removeChild(ta);
         }
 
         // Anti inspect
