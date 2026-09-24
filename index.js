@@ -16,19 +16,25 @@ app.use(function (req, res, next) {
     next();
 });
 app.use(express.json());
-app.use(express.static(__dirname + '/public'));
+
+const noStaleCache = { lastModified: false, etag: false };
+app.use(function (req, res, next) {
+    res.setHeader('Cache-Control', 'no-cache');
+    next();
+});
+app.use(express.static(__dirname + '/public', noStaleCache));
 
 app.all('/android', (req, res) => {
-    res.sendFile(__dirname + '/public/html/ada.html');
+    res.sendFile(__dirname + '/public/html/ada.html', noStaleCache);
 });
 app.all('/ios', (req, res) => {
-    res.sendFile(__dirname + '/public/html/ida.html');
+    res.sendFile(__dirname + '/public/html/ida.html', noStaleCache);
 });
 app.all('/windows', (req, res) => {
-    res.sendFile(__dirname + '/public/html/wda.html');
+    res.sendFile(__dirname + '/public/html/wda.html', noStaleCache);
 });
 app.all('/hosts', (req, res) => {
-    res.sendFile(__dirname + '/public/html/hosts.html');
+    res.sendFile(__dirname + '/public/html/hosts.html', noStaleCache);
 });
 app.all('/file', (req, res) => {
     res.redirect('https://www.mediafire.com/file/2bi5h8f24gyg8ud/svps-hosts.txt/file');
@@ -44,7 +50,7 @@ app.get('/api/players', async (req, res) => {
         const controller = new AbortController();
         const timeout = setTimeout(() => controller.abort(), 5000);
         
-        const response = await fetch('http://45.142.115.57:3001/api/players', {
+        const response = await fetch(process.env.BOT_API_URL || 'http://45.142.115.57:3001/api/players', {
             signal: controller.signal
         });
         
@@ -68,9 +74,14 @@ app.get('/api/players', async (req, res) => {
 // ═══════════════════════════════════════════════
 
 app.all('/', (req, res) => {
-   res.sendFile(__dirname + '/public/html/main.html');
+   res.sendFile(__dirname + '/public/html/main.html', noStaleCache);
 });
 
-app.listen(5000, function () {
-    console.log('Listening on port 5000');
-});
+// Di Vercel jangan panggil listen() - cukup export app-nya.
+if (!process.env.VERCEL) {
+    app.listen(5000, function () {
+        console.log('Listening on port 5000');
+    });
+}
+
+module.exports = app;
