@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="ios.pageTitle">SVPS - iOS Setup</title>
+    <title data-i18n="windows.pageTitle">SVPS - Windows Setup</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Sora:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
@@ -63,7 +63,7 @@
         /* Header */
         .header {
             text-align: center;
-            margin-bottom: 32px;
+            margin-bottom: 28px;
         }
 
         .header .icon {
@@ -92,6 +92,66 @@
             color: var(--text-muted);
         }
 
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 4px;
+            padding: 4px;
+            background: var(--dark-500);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 28px;
+        }
+
+        .tab {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            padding: 11px 10px;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            color: var(--text-muted);
+            font-family: 'Outfit', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+            white-space: nowrap;
+        }
+
+        .tab:hover:not(.active) { color: var(--text-secondary); }
+
+        .tab.active {
+            background: rgba(16,185,129,0.1);
+            color: var(--emerald-300);
+            box-shadow: 0 0 0 1px rgba(16,185,129,0.15);
+        }
+
+        .tab .badge {
+            font-size: 8px;
+            font-weight: 800;
+            padding: 2px 6px;
+            background: var(--emerald-500);
+            color: #fff;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .tab-content { display: none; }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.35s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         /* Section Label */
         .section-label {
             font-size: 10px;
@@ -112,6 +172,30 @@
             border-radius: 2px;
         }
 
+        /* Info Box */
+        .info-box {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px 16px;
+            background: rgba(16,185,129,0.05);
+            border: 1px solid rgba(16,185,129,0.15);
+            border-radius: 10px;
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+            font-size: 12px;
+            line-height: 1.55;
+        }
+
+        .info-box i {
+            color: var(--emerald-400);
+            font-size: 14px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .info-box strong { color: var(--text-primary); font-weight: 600; }
+
         /* Code Block */
         .code-box {
             position: relative;
@@ -125,7 +209,7 @@
         .code-content {
             font-family: 'JetBrains Mono', monospace;
             font-size: 12px;
-            line-height: 1.9;
+            line-height: 2;
             color: var(--emerald-300);
             white-space: pre;
             overflow-x: auto;
@@ -145,8 +229,8 @@
             border-radius: 6px;
         }
 
-        /* Copy Button */
-        .copy-btn {
+        /* Action Button (copy & download share base) */
+        .action-btn {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -161,17 +245,49 @@
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
+            text-decoration: none;
             transition: all 0.3s;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
         }
 
-        .copy-btn:hover {
+        .action-btn:hover {
             box-shadow: 0 4px 25px rgba(16,185,129,0.25);
             transform: translateY(-1px);
         }
 
-        .copy-btn.copied {
+        .action-btn.copied {
             background: var(--discord);
+        }
+
+        /* Path Info */
+        .path-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            background: rgba(8,8,10,0.6);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin-bottom: 24px;
+        }
+
+        .path-box .path-icon {
+            width: 32px; height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background: rgba(245,158,11,0.1);
+            color: #f59e0b;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .path-box code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--text-secondary);
+            word-break: break-all;
         }
 
         /* Steps */
@@ -225,6 +341,12 @@
             right: 16px;
         }
 
+        .inline-code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--emerald-300);
+        }
+
         /* Back */
         .back {
             display: flex;
@@ -271,49 +393,97 @@
     <div class="card">
         <div class="lang-slot" data-lang-switch></div>
         <div class="header">
-            <div class="icon"><i class="fab fa-apple"></i></div>
-            <h1 data-i18n="ios.title">iOS Setup</h1>
-            <p data-i18n="ios.subtitle">Connect using Surge 5</p>
+            <div class="icon"><i class="fab fa-windows"></i></div>
+            <h1 data-i18n="windows.title">Windows Setup</h1>
+            <p data-i18n="common.chooseConnect">Choose how you want to connect</p>
         </div>
 
-        <!-- Surge Config -->
-        <div class="section-label" data-i18n="ios.config">Surge 5 Configuration</div>
-        <div class="code-box">
-            <div class="code-tag">surge.conf</div>
-            <div class="code-content" id="surgeConfig">[General]
-
-[Rule]
-FINAL,DIRECT
-
-[Host]
-growtopia1.com = 45.142.115.57
-growtopia2.com = 45.142.115.57
-www.growtopia1.com = 45.142.115.57
-www.growtopia2.com = 45.142.115.57</div>
+        <!-- Tab Switcher -->
+        <div class="tabs">
+            <button class="tab active" data-tab="auto" onclick="switchTab('auto')">
+                <i class="fas fa-bolt"></i> <span data-i18n="common.autoSetup">Auto Setup</span>
+                <span class="badge" data-i18n="common.easy">Easy</span>
+            </button>
+            <button class="tab" data-tab="manual" onclick="switchTab('manual')">
+                <i class="fas fa-cog"></i> <span data-i18n="common.manual">Manual</span>
+            </button>
         </div>
 
-        <button class="copy-btn" id="copyBtn" onclick="copyConfig()">
-            <i class="fas fa-copy"></i> <span data-i18n="ios.copyConfig">Copy Configuration</span>
-        </button>
+        <!-- ============ AUTO SETUP ============ -->
+        <div class="tab-content active" id="auto">
+            <div class="info-box">
+                <i class="fas fa-bolt"></i>
+                <div data-i18n="windows.autoInfo">Download <strong>SVPS Auto-Setup.bat</strong> and run it as Administrator. The script automatically adds the required entries to your hosts file — no manual editing needed.</div>
+            </div>
 
-        <!-- Steps -->
-        <div class="section-label" data-i18n="common.howToSetup">How to Setup</div>
-        <div class="steps">
-            <div class="step">
-                <div class="step-num">1</div>
-                <div class="step-text" data-i18n="ios.step1">Download <strong>Surge 5</strong> from the App Store</div>
+            <a href="https://www.mediafire.com/file/1bj2u8rdgog3ng9/SVPS+Auto-Setup.bat/file" target="_blank" rel="noopener" class="action-btn">
+                <i class="fas fa-download"></i> <span data-i18n="windows.downloadBat">Download Auto-Setup.bat</span>
+            </a>
+
+            <div class="section-label" data-i18n="common.howToUse">How to Use</div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-text" data-i18n="windows.auto1"><strong>Download</strong> the <code class="inline-code">SVPS Auto-Setup.bat</code> file from MediaFire</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-text" data-i18n="windows.auto2"><strong>Right-click</strong> the file and select <strong>Run as Administrator</strong></div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-text" data-i18n="windows.auto3">If Windows SmartScreen appears, click <strong>More Info → Run Anyway</strong></div>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-text" data-i18n="windows.auto4">Wait for the script to finish, then <strong>open Growtopia</strong> and play!</div>
+                </div>
             </div>
-            <div class="step">
-                <div class="step-num">2</div>
-                <div class="step-text" data-i18n="ios.step2">Open Surge, go to <strong>Profile</strong> and create a new config</div>
+        </div>
+
+        <!-- ============ MANUAL SETUP ============ -->
+        <div class="tab-content" id="manual">
+            <div class="section-label" data-i18n="windows.hostsContent">Hosts File Content</div>
+            <div class="code-box">
+                <div class="code-tag">hosts</div>
+                <div class="code-content" id="hostsCode">45.142.115.57 www.growtopia1.com
+45.142.115.57 www.growtopia2.com
+45.142.115.57 growtopia1.com
+45.142.115.57 growtopia2.com</div>
             </div>
-            <div class="step">
-                <div class="step-num">3</div>
-                <div class="step-text" data-i18n="ios.step3"><strong>Paste</strong> the configuration above into the config file</div>
+
+            <button class="action-btn" id="copyBtn" onclick="copyHosts()">
+                <i class="fas fa-copy"></i> <span data-i18n="common.copyClipboard">Copy to Clipboard</span>
+            </button>
+
+            <div class="section-label" data-i18n="windows.fileLocation">File Location</div>
+            <div class="path-box">
+                <div class="path-icon"><i class="fas fa-folder-open"></i></div>
+                <code>C:\Windows\System32\drivers\etc\hosts</code>
             </div>
-            <div class="step">
-                <div class="step-num">4</div>
-                <div class="step-text" data-i18n="ios.step4">Enable the profile, then open <strong>Growtopia</strong> and play!</div>
+
+            <div class="section-label" data-i18n="common.howToSetup">How to Setup</div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-text" data-i18n="windows.manual1">Open <strong>Notepad</strong> as Administrator</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-text" data-i18n="windows.manual2">Click <strong>File → Open</strong>, navigate to the path above</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-text" data-i18n="windows.manual3">Change file filter to <strong>All Files (*.*)</strong> to see the hosts file</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-text" data-i18n="windows.manual4"><strong>Paste</strong> the hosts content at the bottom of the file</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">5</div>
+                    <div class="step-text" data-i18n="windows.manual5"><strong>Save</strong> the file, open Growtopia, and play!</div>
+                </div>
             </div>
         </div>
 
@@ -322,8 +492,15 @@ www.growtopia2.com = 45.142.115.57</div>
 
     <script src="/i18n.js"></script>
     <script>
-        function copyConfig() {
-            const text = document.getElementById('surgeConfig').textContent;
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelector(`.tab[data-tab="${tabName}"]`).classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        function copyHosts() {
+            const text = document.getElementById('hostsCode').textContent;
             navigator.clipboard.writeText(text).then(() => {
                 const btn = document.getElementById('copyBtn');
                 btn.innerHTML = '<i class="fas fa-check"></i> ' + i18n.t('common.copied');
@@ -333,7 +510,7 @@ www.growtopia2.com = 45.142.115.57</div>
                 toast.classList.add('show');
 
                 setTimeout(() => {
-                    btn.innerHTML = '<i class="fas fa-copy"></i> <span data-i18n="ios.copyConfig">' + i18n.t('ios.copyConfig') + '</span>';
+                    btn.innerHTML = '<i class="fas fa-copy"></i> <span data-i18n="common.copyClipboard">' + i18n.t('common.copyClipboard') + '</span>';
                     btn.classList.remove('copied');
                     toast.classList.remove('show');
                 }, 2000);
