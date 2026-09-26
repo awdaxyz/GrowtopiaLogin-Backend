@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SVPS - iOS Setup</title>
+    <title data-i18n="ios.pageTitle">SVPS - iOS Setup</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Sora:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
@@ -218,6 +218,13 @@
             font-weight: 600;
         }
 
+        /* Language switch */
+        .lang-slot {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+        }
+
         /* Back */
         .back {
             display: flex;
@@ -259,17 +266,18 @@
 </head>
 <body>
 
-    <div class="toast" id="toast"><i class="fas fa-check"></i> Copied to clipboard!</div>
+    <div class="toast" id="toast"><i class="fas fa-check"></i> <span data-i18n="common.toast">Copied to clipboard!</span></div>
 
     <div class="card">
+        <div class="lang-slot" data-lang-switch></div>
         <div class="header">
             <div class="icon"><i class="fab fa-apple"></i></div>
-            <h1>iOS Setup</h1>
-            <p>Connect using Surge 5</p>
+            <h1 data-i18n="ios.title">iOS Setup</h1>
+            <p data-i18n="ios.subtitle">Connect using Surge 5</p>
         </div>
 
         <!-- Surge Config -->
-        <div class="section-label">Surge 5 Configuration</div>
+        <div class="section-label" data-i18n="ios.config">Surge 5 Configuration</div>
         <div class="code-box">
             <div class="code-tag">surge.conf</div>
             <div class="code-content" id="surgeConfig">[General]
@@ -285,46 +293,47 @@ www.growtopia2.com = 45.142.115.57</div>
         </div>
 
         <button class="copy-btn" id="copyBtn" onclick="copyConfig()">
-            <i class="fas fa-copy"></i> Copy Configuration
+            <i class="fas fa-copy"></i> <span data-i18n="ios.copyConfig">Copy Configuration</span>
         </button>
 
         <!-- Steps -->
-        <div class="section-label">How to Setup</div>
+        <div class="section-label" data-i18n="common.howToSetup">How to Setup</div>
         <div class="steps">
             <div class="step">
                 <div class="step-num">1</div>
-                <div class="step-text">Download <strong>Surge 5</strong> from the App Store</div>
+                <div class="step-text" data-i18n="ios.step1">Download <strong>Surge 5</strong> from the App Store</div>
             </div>
             <div class="step">
                 <div class="step-num">2</div>
-                <div class="step-text">Open Surge, go to <strong>Profile</strong> and create a new config</div>
+                <div class="step-text" data-i18n="ios.step2">Open Surge, go to <strong>Profile</strong> and create a new config</div>
             </div>
             <div class="step">
                 <div class="step-num">3</div>
-                <div class="step-text"><strong>Paste</strong> the configuration above into the config file</div>
+                <div class="step-text" data-i18n="ios.step3"><strong>Paste</strong> the configuration above into the config file</div>
             </div>
             <div class="step">
                 <div class="step-num">4</div>
-                <div class="step-text">Enable the profile, then open <strong>Growtopia</strong> and play!</div>
+                <div class="step-text" data-i18n="ios.step4">Enable the profile, then open <strong>Growtopia</strong> and play!</div>
             </div>
         </div>
 
-        <a href="/" class="back"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        <a href="/" class="back"><i class="fas fa-arrow-left"></i> <span data-i18n="common.back">Back to Home</span></a>
     </div>
 
+    <script src="/i18n.js"></script>
     <script>
         function copyConfig() {
             const text = document.getElementById('surgeConfig').textContent;
             navigator.clipboard.writeText(text).then(() => {
                 const btn = document.getElementById('copyBtn');
-                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                btn.innerHTML = '<i class="fas fa-check"></i> ' + i18n.t('common.copied');
                 btn.classList.add('copied');
 
                 const toast = document.getElementById('toast');
                 toast.classList.add('show');
 
                 setTimeout(() => {
-                    btn.innerHTML = '<i class="fas fa-copy"></i> Copy Configuration';
+                    btn.innerHTML = '<i class="fas fa-copy"></i> <span data-i18n="ios.copyConfig">' + i18n.t('ios.copyConfig') + '</span>';
                     btn.classList.remove('copied');
                     toast.classList.remove('show');
                 }, 2000);
