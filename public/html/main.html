@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SV-Private-Server (SVPS): The Best Growtopia Private Server (GTPS)!</title>
+    <title data-i18n="main.pageTitle">SV-Private-Server (SVPS): The Best Growtopia Private Server (GTPS)!</title>
     <meta name="description" content="SV-Private-Server - The best Growtopia Private Server with custom features, active community, and daily events.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800;900&family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -84,6 +84,12 @@
             height: 32px;
             border-radius: 8px;
             object-fit: cover;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
 
         .nav-links {
@@ -763,6 +769,7 @@
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .mobile-menu { display: block; }
+            .nav-actions { gap: 14px; }
 
             .hero-buttons { flex-direction: column; align-items: stretch; padding: 0 20px; }
             .btn { justify-content: center; }
@@ -798,14 +805,17 @@
                 <img src="/svpss.jpg" alt="SVPS" class="nav-logo-img">
                 SV-Private-Server
             </a>
-            <ul class="nav-links">
-                <li><a href="#features">Features</a></li>
-                <li><a href="#download">Download</a></li>
-                <li><a href="#community">Community</a></li>
-                <li><a href="https://discord.com/invite/9dPFmN55wT" class="nav-cta nav-cta-discord" target="_blank"><i class="fab fa-discord"></i> Discord</a></li>
-                <li><a href="https://chat.whatsapp.com/JsAaAxpArqOGr9Pt2RU12j" class="nav-cta nav-cta-wa" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
-            </ul>
-            <button class="mobile-menu" id="mobileMenu"><i class="fas fa-bars"></i></button>
+            <div class="nav-actions">
+                <ul class="nav-links">
+                    <li><a href="#features" data-i18n="nav.features">Features</a></li>
+                    <li><a href="#download" data-i18n="nav.download">Download</a></li>
+                    <li><a href="#community" data-i18n="nav.community">Community</a></li>
+                    <li><a href="https://discord.com/invite/9dPFmN55wT" class="nav-cta nav-cta-discord" target="_blank"><i class="fab fa-discord"></i> Discord</a></li>
+                    <li><a href="https://chat.whatsapp.com/JsAaAxpArqOGr9Pt2RU12j" class="nav-cta nav-cta-wa" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+                </ul>
+                <div data-lang-switch></div>
+                <button class="mobile-menu" id="mobileMenu"><i class="fas fa-bars"></i></button>
+            </div>
         </div>
     </nav>
 
@@ -814,32 +824,32 @@
         <div class="hero-inner">
             <div class="hero-badge">
                 <div class="pulse"></div>
-                Server Online
+                <span data-i18n="hero.online">Server Online</span>
             </div>
             <h1 class="hero-title">
                 SV-Private<span class="gradient">-Server</span>
             </h1>
             <div class="hero-since">
-    <span><span class="year">Since 2022</span> · Still Standing</span>
+    <span data-i18n="hero.since"><span class="year">Since 2022</span> · Still Standing</span>
 </div>
-            <p class="hero-desc">
+            <p class="hero-desc" data-i18n="hero.desc">
                 The best Growtopia Private Server with exclusive features, exciting gameplay, and an active community. Join now!
             </p>
             <div class="hero-buttons">
                 <a href="#download" class="btn btn-primary">
-                    <i class="fas fa-download"></i> Download Now
+                    <i class="fas fa-download"></i> <span data-i18n="hero.downloadNow">Download Now</span>
                 </a>
                 <a href="https://discord.com/invite/9dPFmN55wT" class="btn btn-discord" target="_blank">
-                    <i class="fab fa-discord"></i> Join Discord
+                    <i class="fab fa-discord"></i> <span data-i18n="hero.joinDiscord">Join Discord</span>
                 </a>
                 <a href="https://chat.whatsapp.com/JsAaAxpArqOGr9Pt2RU12j" class="btn btn-whatsapp" target="_blank">
-                    <i class="fab fa-whatsapp"></i> Join WhatsApp
+                    <i class="fab fa-whatsapp"></i> <span data-i18n="hero.joinWa">Join WhatsApp</span>
                 </a>
             </div>
             <div class="player-count">
                 <div class="live-dot"></div>
                 <span class="count" id="playerCount">0</span>
-                <span class="label">Players Online</span>
+                <span class="label" data-i18n="hero.playersOnline">Players Online</span>
             </div>
         </div>
     </section>
@@ -848,40 +858,40 @@
     <section class="features" id="features">
         <div class="container">
             <div class="reveal">
-                <div class="section-label">Features</div>
-                <h2 class="section-title">What Makes Us Different</h2>
-                <p class="section-desc">Custom-built features designed for the best Growtopia experience.</p>
+                <div class="section-label" data-i18n="features.label">Features</div>
+                <h2 class="section-title" data-i18n="features.title">What Makes Us Different</h2>
+                <p class="section-desc" data-i18n="features.desc">Custom-built features designed for the best Growtopia experience.</p>
             </div>
             <div class="features-grid">
                 <div class="feature-card reveal">
                     <div class="icon icon-green"><i class="fas fa-bolt"></i></div>
-                    <h3>Blazing Fast</h3>
-                    <p>Optimized server with minimal latency for smooth gameplay.</p>
+                    <h3 data-i18n="features.fast.title">Blazing Fast</h3>
+                    <p data-i18n="features.fast.desc">Optimized server with minimal latency for smooth gameplay.</p>
                 </div>
                 <div class="feature-card reveal">
                     <div class="icon icon-blue"><i class="fas fa-shield-halved"></i></div>
-                    <h3>Anti-Cheat</h3>
-                    <p>Advanced detection keeping every world fair and cheat-free.</p>
+                    <h3 data-i18n="features.anticheat.title">Anti-Cheat</h3>
+                    <p data-i18n="features.anticheat.desc">Advanced detection keeping every world fair and cheat-free.</p>
                 </div>
                 <div class="feature-card reveal">
                     <div class="icon icon-amber"><i class="fas fa-gift"></i></div>
-                    <h3>Daily Events</h3>
-                    <p>Weekend giveaway, gem-events, and exclusive rewards every day.</p>
+                    <h3 data-i18n="features.events.title">Daily Events</h3>
+                    <p data-i18n="features.events.desc">Weekend giveaway, gem-events, and exclusive rewards every day.</p>
                 </div>
                 <div class="feature-card reveal">
                     <div class="icon icon-rose"><i class="fas fa-wand-magic-sparkles"></i></div>
-                    <h3>Custom Items</h3>
-                    <p>Exclusive items and blocks you won't find anywhere else.</p>
+                    <h3 data-i18n="features.items.title">Custom Items</h3>
+                    <p data-i18n="features.items.desc">Exclusive items and blocks you won't find anywhere else.</p>
                 </div>
                 <div class="feature-card reveal">
                     <div class="icon icon-violet"><i class="fas fa-store"></i></div>
-                    <h3>Player Market</h3>
-                    <p>Built-in trading system for safe and easy transactions.</p>
+                    <h3 data-i18n="features.market.title">Player Market</h3>
+                    <p data-i18n="features.market.desc">Built-in trading system for safe and easy transactions.</p>
                 </div>
                 <div class="feature-card reveal">
                     <div class="icon icon-cyan"><i class="fas fa-headset"></i></div>
-                    <h3>Active Support</h3>
-                    <p>Dedicated staff team ready to help 24/7 on Discord.</p>
+                    <h3 data-i18n="features.support.title">Active Support</h3>
+                    <p data-i18n="features.support.desc">Dedicated staff team ready to help 24/7 on Discord.</p>
                 </div>
             </div>
         </div>
@@ -891,9 +901,9 @@
     <section class="download" id="download">
         <div class="container">
             <div class="reveal">
-                <div class="section-label">Download</div>
-                <h2 class="section-title">Play on Any Device</h2>
-                <p class="section-desc">Available on all major platforms. Pick yours and start playing.</p>
+                <div class="section-label" data-i18n="download.label">Download</div>
+                <h2 class="section-title" data-i18n="download.title">Play on Any Device</h2>
+                <p class="section-desc" data-i18n="download.desc">Available on all major platforms. Pick yours and start playing.</p>
             </div>
             <div class="download-grid">
                 <div class="download-card reveal">
@@ -901,7 +911,7 @@
                     <h3>Windows</h3>
                     <p class="subtitle">Windows 7, 8, 10, 11</p>
                     <a href="/windows" class="download-btn">
-                        <i class="fas fa-download"></i> Download
+                        <i class="fas fa-download"></i> <span data-i18n="download.btn">Download</span>
                     </a>
                 </div>
                 <div class="download-card reveal">
@@ -909,7 +919,7 @@
                     <h3>Android</h3>
                     <p class="subtitle">Android 5.0+</p>
                     <a href="/android" class="download-btn">
-                        <i class="fas fa-download"></i> Download
+                        <i class="fas fa-download"></i> <span data-i18n="download.btn">Download</span>
                     </a>
                 </div>
                 <div class="download-card reveal">
@@ -917,7 +927,7 @@
                     <h3>iOS</h3>
                     <p class="subtitle">iPhone & iPad</p>
                     <a href="/ios" class="download-btn">
-                        <i class="fas fa-download"></i> Download
+                        <i class="fas fa-download"></i> <span data-i18n="download.btn">Download</span>
                     </a>
                 </div>
             </div>
@@ -928,38 +938,38 @@
     <section class="community-section" id="community">
         <div class="container">
             <div class="reveal">
-                <div class="section-label">Community</div>
-                <h2 class="section-title">Join Our Community</h2>
-                <p class="section-desc">Connect with other players, get updates, and never miss an event.</p>
+                <div class="section-label" data-i18n="community.label">Community</div>
+                <h2 class="section-title" data-i18n="community.title">Join Our Community</h2>
+                <p class="section-desc" data-i18n="community.desc">Connect with other players, get updates, and never miss an event.</p>
             </div>
             <div class="community-grid">
                 <!-- Discord -->
                 <div class="community-card card-discord reveal">
                     <div class="card-icon"><i class="fab fa-discord"></i></div>
-                    <h3>Discord Server</h3>
-                    <p>Chat with players, get support, join giveaways, and stay updated with announcements.</p>
+                    <h3 data-i18n="community.discord.title">Discord Server</h3>
+                    <p data-i18n="community.discord.desc">Chat with players, get support, join giveaways, and stay updated with announcements.</p>
                     <a href="https://discord.com/invite/9dPFmN55wT" class="btn-card btn-card-discord" target="_blank">
-                        <i class="fab fa-discord"></i> Join Discord
+                        <i class="fab fa-discord"></i> <span data-i18n="hero.joinDiscord">Join Discord</span>
                     </a>
                     <div class="card-meta">
                         <div class="card-stat">
                             <div class="stat-dot"></div>
-                            4,000+ Members
+                            <span data-i18n="community.discord.members">4,000+ Members</span>
                         </div>
                     </div>
                 </div>
                 <!-- WhatsApp -->
                 <div class="community-card card-whatsapp reveal">
                     <div class="card-icon"><i class="fab fa-whatsapp"></i></div>
-                    <h3>WhatsApp Group</h3>
-                    <p>Quick updates, event notifications, and chat directly with the community on WhatsApp.</p>
+                    <h3 data-i18n="community.wa.title">WhatsApp Group</h3>
+                    <p data-i18n="community.wa.desc">Quick updates, event notifications, and chat directly with the community on WhatsApp.</p>
                     <a href="https://chat.whatsapp.com/JsAaAxpArqOGr9Pt2RU12j" class="btn-card btn-card-wa" target="_blank">
-                        <i class="fab fa-whatsapp"></i> Join WhatsApp
+                        <i class="fab fa-whatsapp"></i> <span data-i18n="hero.joinWa">Join WhatsApp</span>
                     </a>
                     <div class="card-meta">
                         <div class="card-stat">
                             <div class="stat-dot"></div>
-                            Active Group
+                            <span data-i18n="community.wa.active">Active Group</span>
                         </div>
                     </div>
                 </div>
@@ -971,19 +981,20 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-left">
-    &copy; 2022-2026 <span>SV-Private-Server</span>. All rights reserved.
+    <span data-i18n="footer.rights">&copy; 2022-2026 <span>SV-Private-Server</span>. All rights reserved.</span>
     <br>
-    <small style="opacity: 0.7;">Not affiliated with Growtopia or Ubisoft.</small>
+    <small style="opacity: 0.7;" data-i18n="footer.disclaimer">Not affiliated with Growtopia or Ubisoft.</small>
 </div>
             <div class="footer-right">
                 <a href="https://discord.com/invite/9dPFmN55wT" class="footer-link" target="_blank">Discord</a>
                 <a href="https://chat.whatsapp.com/JsAaAxpArqOGr9Pt2RU12j" class="footer-link" target="_blank">WhatsApp</a>
-               <a href="#download" class="footer-link">Download</a>
-                <a href="#features" class="footer-link">Features</a>
+               <a href="#download" class="footer-link" data-i18n="nav.download">Download</a>
+                <a href="#features" class="footer-link" data-i18n="nav.features">Features</a>
             </div>
         </div>
     </footer>
 
+    <script src="/i18n.js"></script>
     <script>
         // ── Scroll Reveal ──
         const reveals = document.querySelectorAll('.reveal');
@@ -1025,21 +1036,25 @@ async function fetchPlayerCount() {
     }
 }
 
+function statusLabel(key) {
+    return '<span data-i18n="' + key + '">' + i18n.t(key) + '</span>';
+}
+
 function updateStatusBadge(status) {
     if (!statusBadge) return;
     
     if (status === 'online') {
-        statusBadge.innerHTML = '<div class="pulse"></div> Server Online';
+        statusBadge.innerHTML = '<div class="pulse"></div> ' + statusLabel('hero.online');
         statusBadge.style.color = 'var(--emerald-400)';
         statusBadge.style.background = 'rgba(16,185,129,0.08)';
         statusBadge.style.borderColor = 'rgba(16,185,129,0.12)';
     } else if (status === 'offline') {
-        statusBadge.innerHTML = '<div class="pulse" style="background:#ef4444;box-shadow:0 0 10px #ef4444"></div> Server Offline';
+        statusBadge.innerHTML = '<div class="pulse" style="background:#ef4444;box-shadow:0 0 10px #ef4444"></div> ' + statusLabel('hero.offline');
         statusBadge.style.color = '#ef4444';
         statusBadge.style.background = 'rgba(239,68,68,0.08)';
         statusBadge.style.borderColor = 'rgba(239,68,68,0.12)';
     } else {
-        statusBadge.innerHTML = '<div class="pulse" style="background:#94a3b8"></div> Connecting...';
+        statusBadge.innerHTML = '<div class="pulse" style="background:#94a3b8"></div> ' + statusLabel('hero.connecting');
         statusBadge.style.color = '#94a3b8';
         statusBadge.style.background = 'rgba(148,163,184,0.08)';
         statusBadge.style.borderColor = 'rgba(148,163,184,0.12)';
