@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SVPS - Android Setup</title>
+    <title data-i18n="android.pageTitle">SVPS - Android Setup</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Sora:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
@@ -347,6 +347,19 @@
             font-weight: 600;
         }
 
+        /* Language switch */
+        .lang-slot {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+        }
+
+        .inline-code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--emerald-300);
+        }
+
         /* Back */
         .back {
             display: flex;
@@ -388,23 +401,24 @@
 </head>
 <body>
 
-    <div class="toast" id="toast"><i class="fas fa-check"></i> Copied to clipboard!</div>
+    <div class="toast" id="toast"><i class="fas fa-check"></i> <span data-i18n="common.toast">Copied to clipboard!</span></div>
 
     <div class="card">
+        <div class="lang-slot" data-lang-switch></div>
         <div class="header">
             <div class="icon"><i class="fab fa-android"></i></div>
-            <h1>Android Setup</h1>
-            <p>Choose how you want to connect</p>
+            <h1 data-i18n="android.title">Android Setup</h1>
+            <p data-i18n="common.chooseConnect">Choose how you want to connect</p>
         </div>
 
         <!-- Tab Switcher -->
         <div class="tabs">
             <button class="tab active" data-tab="auto" onclick="switchTab('auto')">
-                <i class="fas fa-bolt"></i> Auto Setup
-                <span class="badge">Easy</span>
+                <i class="fas fa-bolt"></i> <span data-i18n="common.autoSetup">Auto Setup</span>
+                <span class="badge" data-i18n="common.easy">Easy</span>
             </button>
             <button class="tab" data-tab="manual" onclick="switchTab('manual')">
-                <i class="fas fa-cog"></i> Manual
+                <i class="fas fa-cog"></i> <span data-i18n="common.manual">Manual</span>
             </button>
         </div>
 
@@ -412,30 +426,30 @@
         <div class="tab-content active" id="auto">
             <div class="info-box">
                 <i class="fas fa-bolt"></i>
-                <div>Download <strong>SVPSConnect</strong> and install it. The app auto-redirects Real Growtopia to SVPS with a single tap — no hosts editing needed.</div>
+                <div data-i18n="android.autoInfo">Download <strong>SVPSConnect</strong> and install it. The app auto-redirects Real Growtopia to SVPS with a single tap — no hosts editing needed.</div>
             </div>
 
             <a href="https://www.mediafire.com/file/gxr84ue6uepy94i/SVPS-Connect.apk/file" target="_blank" rel="noopener" class="action-btn">
-                <i class="fas fa-download"></i> Download SVPSConnect.apk
+                <i class="fas fa-download"></i> <span data-i18n="android.downloadApk">Download SVPSConnect.apk</span>
             </a>
 
-            <div class="section-label">How to Use</div>
+            <div class="section-label" data-i18n="common.howToUse">How to Use</div>
             <div class="steps">
                 <div class="step">
                     <div class="step-num">1</div>
-                    <div class="step-text"><strong>Download</strong> the <code style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--emerald-300)">SVPSConnect.apk</code> file from MediaFire</div>
+                    <div class="step-text" data-i18n="android.auto1"><strong>Download</strong> the <code class="inline-code">SVPSConnect.apk</code> file from MediaFire</div>
                 </div>
                 <div class="step">
                     <div class="step-num">2</div>
-                    <div class="step-text"><strong>Open</strong> the APK and install it. If prompted, allow <strong>Install from unknown sources</strong></div>
+                    <div class="step-text" data-i18n="android.auto2"><strong>Open</strong> the APK and install it. If prompted, allow <strong>Install from unknown sources</strong></div>
                 </div>
                 <div class="step">
                     <div class="step-num">3</div>
-                    <div class="step-text"><strong>Open SVPSConnect</strong> and tap <strong>Connect</strong> (accept the VPN request if asked)</div>
+                    <div class="step-text" data-i18n="android.auto3"><strong>Open SVPSConnect</strong> and tap <strong>Connect</strong> (accept the VPN request if asked)</div>
                 </div>
                 <div class="step">
                     <div class="step-num">4</div>
-                    <div class="step-text">Once connected, <strong>open Growtopia</strong> and play!</div>
+                    <div class="step-text" data-i18n="android.auto4">Once connected, <strong>open Growtopia</strong> and play!</div>
                 </div>
             </div>
         </div>
@@ -444,15 +458,15 @@
         <div class="tab-content" id="manual">
             <div class="info-box">
                 <i class="fas fa-circle-info"></i>
-                <div>Prefer no app? Apply these entries with a hosts tool like <strong>PowerTunnel</strong> or <strong>Hosts Go</strong> to redirect Growtopia to SVPS.</div>
+                <div data-i18n="android.manualInfo">Prefer no app? Apply these entries with a hosts tool like <strong>PowerTunnel</strong> or <strong>Hosts Go</strong> to redirect Growtopia to SVPS.</div>
             </div>
 
-            <div class="section-label">Hosts File</div>
+            <div class="section-label" data-i18n="android.hostsFile">Hosts File</div>
             <a href="https://www.mediafire.com/file/89aa3biv8dbvgmp/svps-new.txt/file" target="_blank" rel="noopener" class="action-btn">
-                <i class="fas fa-download"></i> Download svps-new.txt
+                <i class="fas fa-download"></i> <span data-i18n="android.downloadTxt">Download svps-new.txt</span>
             </a>
 
-            <div class="section-label">Or Copy Manually</div>
+            <div class="section-label" data-i18n="android.orCopy">Or Copy Manually</div>
             <div class="code-box">
                 <div class="code-tag">hosts</div>
                 <div class="code-content" id="hostsCode">45.142.115.57 www.growtopia1.com
@@ -462,39 +476,40 @@
             </div>
 
             <button class="action-btn" id="copyBtn" onclick="copyHosts()">
-                <i class="fas fa-copy"></i> Copy to Clipboard
+                <i class="fas fa-copy"></i> <span data-i18n="common.copyClipboard">Copy to Clipboard</span>
             </button>
 
-            <div class="section-label">Subscription URL</div>
+            <div class="section-label" data-i18n="android.subUrl">Subscription URL</div>
             <div class="path-box">
-                <button type="button" class="path-icon" id="urlCopyBtn" onclick="copySubUrl()" title="Copy URL" aria-label="Copy subscription URL"><i class="fas fa-link"></i></button>
+                <button type="button" class="path-icon" id="urlCopyBtn" onclick="copySubUrl()" title="Copy URL" aria-label="Copy subscription URL" data-i18n-title="android.copyUrl" data-i18n-aria="android.copyUrlAria"><i class="fas fa-link"></i></button>
                 <code id="subUrl">https://svps.website/hosts</code>
             </div>
 
-            <div class="section-label">How to Setup</div>
+            <div class="section-label" data-i18n="common.howToSetup">How to Setup</div>
             <div class="steps">
                 <div class="step">
                     <div class="step-num">1</div>
-                    <div class="step-text">Install <strong>PowerTunnel</strong> or <strong>Hosts Go</strong> from the Play Store</div>
+                    <div class="step-text" data-i18n="android.manual1">Install <strong>PowerTunnel</strong> or <strong>Hosts Go</strong> from the Play Store</div>
                 </div>
                 <div class="step">
                     <div class="step-num">2</div>
-                    <div class="step-text"><strong>Download</strong> the hosts file above, or copy the entries / import the subscription URL</div>
+                    <div class="step-text" data-i18n="android.manual2"><strong>Download</strong> the hosts file above, or copy the entries / import the subscription URL</div>
                 </div>
                 <div class="step">
                     <div class="step-num">3</div>
-                    <div class="step-text"><strong>Import / paste</strong> the entries into the app's hosts list</div>
+                    <div class="step-text" data-i18n="android.manual3"><strong>Import / paste</strong> the entries into the app's hosts list</div>
                 </div>
                 <div class="step">
                     <div class="step-num">4</div>
-                    <div class="step-text"><strong>Enable</strong> the tunnel, then open <strong>Growtopia</strong> and play!</div>
+                    <div class="step-text" data-i18n="android.manual4"><strong>Enable</strong> the tunnel, then open <strong>Growtopia</strong> and play!</div>
                 </div>
             </div>
         </div>
 
-        <a href="/" class="back"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        <a href="/" class="back"><i class="fas fa-arrow-left"></i> <span data-i18n="common.back">Back to Home</span></a>
     </div>
 
+    <script src="/i18n.js"></script>
     <script>
         function switchTab(tabName) {
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -507,14 +522,14 @@
             const text = document.getElementById('hostsCode').textContent;
             navigator.clipboard.writeText(text).then(() => {
                 const btn = document.getElementById('copyBtn');
-                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                btn.innerHTML = '<i class="fas fa-check"></i> ' + i18n.t('common.copied');
                 btn.classList.add('copied');
 
                 const toast = document.getElementById('toast');
                 toast.classList.add('show');
 
                 setTimeout(() => {
-                    btn.innerHTML = '<i class="fas fa-copy"></i> Copy to Clipboard';
+                    btn.innerHTML = '<i class="fas fa-copy"></i> <span data-i18n="common.copyClipboard">' + i18n.t('common.copyClipboard') + '</span>';
                     btn.classList.remove('copied');
                     toast.classList.remove('show');
                 }, 2000);
