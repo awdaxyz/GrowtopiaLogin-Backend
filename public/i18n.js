@@ -118,6 +118,22 @@
             'ios.step3': '<strong>Tempel</strong> konfigurasi di atas ke file config',
             'ios.step4': 'Aktifkan profile-nya, lalu buka <strong>Growtopia</strong> dan mainkan!',
 
+            // ── iOS: tab Sertifikat ──
+            'ios.tabCert': 'Sertifikat',
+            'ios.tabConfig': 'Config Surge',
+            'ios.certDownload': 'Unduh Sertifikat',
+            'ios.certMeta': 'Wajib untuk login. Cukup diinstal sekali per perangkat.',
+            'ios.certButton': 'Unduh Sertifikat',
+            'ios.certInstall': 'Cara Instal',
+            'ios.certStep1': 'Tap <strong>Unduh Sertifikat</strong> lewat <strong>Safari</strong>. Kalau MediaFire menampilkan halaman, tap tombol Download-nya',
+            'ios.certStep2': 'Saat iOS meminta izin mengunduh profil konfigurasi, tap <strong>Allow</strong>',
+            'ios.certStep3': 'Buka <strong>Settings → General → VPN &amp; Device Management</strong>, tap <strong>vFact\'s SkyValley</strong> di bawah Downloaded Profile, tap <strong>Install</strong>, masukkan passcode, lalu tap <strong>Install</strong> sekali lagi',
+            'ios.certStep4': 'Buka <strong>Settings → General → About → Certificate Trust Settings</strong> lalu aktifkan <strong>vFact\'s SkyValley</strong>',
+            'ios.certStep4Note': 'Jangan dilewati. Tanpa ini, login tetap gagal.',
+            'ios.certStep5': 'Lanjut ke tab <strong>Config Surge</strong> untuk menyelesaikan setup',
+            'ios.goConfig': 'Lanjut ke Config Surge',
+            'ios.goCert': 'Sertifikat belum terpasang?',
+
             // ── Windows ──
             'windows.pageTitle': 'SVPS - Setup Windows',
             'windows.title': 'Setup Windows',
@@ -133,7 +149,25 @@
             'windows.manual2': 'Klik <strong>File → Open</strong>, lalu buka lokasi di atas',
             'windows.manual3': 'Ubah filter file ke <strong>All Files (*.*)</strong> supaya file hosts kelihatan',
             'windows.manual4': '<strong>Tempel</strong> isi hosts di baris paling bawah file',
-            'windows.manual5': '<strong>Simpan</strong> file-nya, buka Growtopia, dan mainkan!'
+            'windows.manual5': '<strong>Simpan</strong> file-nya, buka Growtopia, dan mainkan!',
+
+            // ── Windows: tab Sertifikat ──
+            'windows.tabCert': 'Sertifikat',
+            'windows.certNotice': 'Login juga butuh sertifikat.',
+            'windows.certNoticeLink': 'Instal di tab Sertifikat',
+            'windows.certDownload': 'Unduh Sertifikat',
+            'windows.certMeta': 'Wajib untuk login. Cukup diinstal sekali per komputer.',
+            'windows.certButton': 'Unduh Sertifikat',
+            'windows.certInstall': 'Cara Instal',
+            'windows.certStep1': '<strong>Unduh</strong> sertifikatnya dan simpan, misalnya di folder <strong>Downloads</strong>',
+            'windows.certStep2': '<strong>Klik dua kali</strong> file-nya, lalu klik <strong>Install Certificate</strong>. Kalau muncul peringatan keamanan, klik <strong>Open</strong>',
+            'windows.certStep3': 'Pilih <strong>Local Machine</strong>, klik <strong>Next</strong>, lalu izinkan permission administrator',
+            'windows.certStep4': 'Pilih <strong>Place all certificates in the following store</strong>, klik <strong>Browse</strong>, pilih <strong>Trusted Root Certification Authorities</strong>, lalu klik <strong>OK</strong> dan <strong>Next</strong>',
+            'windows.certStep4Note': 'Jangan biarkan di "Automatically". Sertifikat harus masuk ke Trusted Root.',
+            'windows.certStep5': 'Klik <strong>Finish</strong>, lalu <strong>Yes</strong> di peringatan keamanan. Akan muncul "The import was successful"',
+            'windows.certStep6': '<strong>Tutup Growtopia sepenuhnya</strong> (cek Task Manager), lalu buka lagi dan mainkan!',
+            'windows.quickMethod': 'Cara Cepat',
+            'windows.quickInfo': 'Mau cukup satu perintah? Buka <strong>Command Prompt sebagai Administrator</strong> lalu jalankan ini. Ubah path-nya kalau file kamu simpan di tempat lain.'
         }
     };
 
