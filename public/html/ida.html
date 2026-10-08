@@ -14,6 +14,7 @@
             --dark-500: #08080a;
             --dark-600: #050506;
             --discord: #5865F2;
+            --amber: #f59e0b;
             --text-primary: #f1f5f9;
             --text-secondary: #94a3b8;
             --text-muted: #475569;
@@ -63,7 +64,7 @@
         /* Header */
         .header {
             text-align: center;
-            margin-bottom: 32px;
+            margin-bottom: 28px;
         }
 
         .header .icon {
@@ -91,6 +92,51 @@
             font-weight: 300;
             color: var(--text-muted);
         }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 6px;
+            padding: 5px;
+            margin-bottom: 28px;
+            background: var(--dark-500);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .tab {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 11px 8px;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.2s, background 0.2s;
+        }
+
+        .tab:hover { color: var(--text-secondary); }
+
+        .tab:focus-visible,
+        .copy-btn:focus-visible,
+        .back:focus-visible {
+            outline: 2px solid var(--emerald-300);
+            outline-offset: 2px;
+        }
+
+        .tab.active {
+            background: rgba(16,185,129,0.12);
+            color: var(--emerald-300);
+        }
+
+        .panel[hidden] { display: none; }
 
         /* Section Label */
         .section-label {
@@ -145,7 +191,7 @@
             border-radius: 6px;
         }
 
-        /* Copy Button */
+        /* Copy / Download Button */
         .copy-btn {
             display: flex;
             align-items: center;
@@ -160,6 +206,7 @@
             font-family: 'Outfit', sans-serif;
             font-size: 14px;
             font-weight: 600;
+            text-decoration: none;
             cursor: pointer;
             transition: all 0.3s;
             margin-bottom: 28px;
@@ -172,6 +219,44 @@
 
         .copy-btn.copied {
             background: var(--discord);
+        }
+
+        /* Certificate file chip */
+        .file-chip {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px;
+            margin-bottom: 14px;
+            background: var(--dark-500);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .file-chip .file-icon {
+            width: 40px; height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border-radius: 10px;
+            background: rgba(16,185,129,0.08);
+            color: var(--emerald-400);
+            font-size: 18px;
+        }
+
+        .file-name {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12.5px;
+            color: var(--text-primary);
+            word-break: break-all;
+        }
+
+        .file-meta {
+            font-size: 12px;
+            font-weight: 300;
+            color: var(--text-muted);
+            margin-top: 3px;
         }
 
         /* Steps */
@@ -218,6 +303,47 @@
             font-weight: 600;
         }
 
+        /* The one step people skip */
+        .step.critical {
+            background: rgba(245,158,11,0.06);
+            border-color: rgba(245,158,11,0.3);
+        }
+
+        .step.critical .step-num {
+            background: rgba(245,158,11,0.15);
+            color: var(--amber);
+        }
+
+        .step-note {
+            display: block;
+            margin-top: 6px;
+            font-size: 12px;
+            color: var(--amber);
+        }
+
+        /* Pointer to the other tab */
+        .next-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--emerald-300);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .next-link:hover { background: rgba(16,185,129,0.06); }
+        .next-link:focus-visible { outline: 2px solid var(--emerald-300); outline-offset: 2px; }
+
         /* Language switch */
         .lang-slot {
             position: absolute;
@@ -262,6 +388,15 @@
             opacity: 1;
             transform: translateX(-50%) translateY(0);
         }
+
+        @media (max-width: 420px) {
+            .card { padding: 32px 20px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .card { animation: none; }
+            .copy-btn, .toast, .tab { transition: none; }
+        }
     </style>
 </head>
 <body>
@@ -276,11 +411,71 @@
             <p data-i18n="ios.subtitle">Connect using Surge 5</p>
         </div>
 
-        <!-- Surge Config -->
-        <div class="section-label" data-i18n="ios.config">Surge 5 Configuration</div>
-        <div class="code-box">
-            <div class="code-tag">surge.conf</div>
-            <div class="code-content" id="surgeConfig">[General]
+        <!-- Tabs -->
+        <div class="tabs" role="tablist">
+            <button class="tab active" id="tab-cert" role="tab" aria-selected="true" aria-controls="panel-cert" onclick="showTab('cert')">
+                <i class="fas fa-certificate"></i> <span data-i18n="ios.tabCert">Certificate</span>
+            </button>
+            <button class="tab" id="tab-config" role="tab" aria-selected="false" aria-controls="panel-config" onclick="showTab('config')">
+                <i class="fas fa-sliders"></i> <span data-i18n="ios.tabConfig">Surge Config</span>
+            </button>
+        </div>
+
+        <!-- ============ Certificate panel ============ -->
+        <div class="panel" id="panel-cert" role="tabpanel" aria-labelledby="tab-cert">
+            <div class="section-label" data-i18n="ios.certDownload">Download Certificate</div>
+
+            <div class="file-chip">
+                <div class="file-icon"><i class="fas fa-file-shield"></i></div>
+                <div>
+                    <div class="file-name">vFact's SkyValley.crt</div>
+                    <div class="file-meta" data-i18n="ios.certMeta">Required to log in. Install it once per device.</div>
+                </div>
+            </div>
+
+            <a class="copy-btn" id="certDownload" href="https://www.mediafire.com/file/8qe1pv1ry02jed4/vFact's+SkyValley.crt/file" target="_blank" rel="noopener noreferrer">
+                <i class="fas fa-download"></i> <span data-i18n="ios.certButton">Download Certificate</span>
+            </a>
+
+            <div class="section-label" data-i18n="ios.certInstall">How to Install</div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-text" data-i18n="ios.certStep1">Tap <strong>Download Certificate</strong> using <strong>Safari</strong>. If MediaFire shows a page, tap its Download button</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-text" data-i18n="ios.certStep2">When iOS asks to download a configuration profile, tap <strong>Allow</strong></div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-text" data-i18n="ios.certStep3">Open <strong>Settings → General → VPN &amp; Device Management</strong>, tap <strong>vFact's SkyValley</strong> under Downloaded Profile, tap <strong>Install</strong>, enter your passcode, then tap <strong>Install</strong> again</div>
+                </div>
+                <div class="step critical">
+                    <div class="step-num">4</div>
+                    <div class="step-text">
+                        <span data-i18n="ios.certStep4">Open <strong>Settings → General → About → Certificate Trust Settings</strong> and turn on <strong>vFact's SkyValley</strong></span>
+                        <span class="step-note" data-i18n="ios.certStep4Note">Do not skip this. Without it, login still fails.</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">5</div>
+                    <div class="step-text" data-i18n="ios.certStep5">Continue with the <strong>Surge Config</strong> tab to finish setup</div>
+                </div>
+            </div>
+
+            <button class="next-link" onclick="showTab('config')">
+                <span data-i18n="ios.goConfig">Go to Surge Config</span> <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <!-- ============ Surge config panel ============ -->
+        <div class="panel" id="panel-config" role="tabpanel" aria-labelledby="tab-config" hidden>
+            <!-- Surge Config -->
+            <div class="section-label" data-i18n="ios.config">Surge 5 Configuration</div>
+            <div class="code-box">
+                <div class="code-tag">surge.conf</div>
+                <div class="code-content" id="surgeConfig">[General]
 
 [Rule]
 FINAL,DIRECT
@@ -290,31 +485,36 @@ growtopia1.com = 45.142.115.57
 growtopia2.com = 45.142.115.57
 www.growtopia1.com = 45.142.115.57
 www.growtopia2.com = 45.142.115.57</div>
-        </div>
+            </div>
 
-        <button class="copy-btn" id="copyBtn" onclick="copyConfig()">
-            <i class="fas fa-copy"></i> <span data-i18n="ios.copyConfig">Copy Configuration</span>
-        </button>
+            <button class="copy-btn" id="copyBtn" onclick="copyConfig()">
+                <i class="fas fa-copy"></i> <span data-i18n="ios.copyConfig">Copy Configuration</span>
+            </button>
 
-        <!-- Steps -->
-        <div class="section-label" data-i18n="common.howToSetup">How to Setup</div>
-        <div class="steps">
-            <div class="step">
-                <div class="step-num">1</div>
-                <div class="step-text" data-i18n="ios.step1">Download <strong>Surge 5</strong> from the App Store</div>
+            <!-- Steps -->
+            <div class="section-label" data-i18n="common.howToSetup">How to Setup</div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-text" data-i18n="ios.step1">Download <strong>Surge 5</strong> from the App Store</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-text" data-i18n="ios.step2">Open Surge, go to <strong>Profile</strong> and create a new config</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-text" data-i18n="ios.step3"><strong>Paste</strong> the configuration above into the config file</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-text" data-i18n="ios.step4">Enable the profile, then open <strong>Growtopia</strong> and play!</div>
+                </div>
             </div>
-            <div class="step">
-                <div class="step-num">2</div>
-                <div class="step-text" data-i18n="ios.step2">Open Surge, go to <strong>Profile</strong> and create a new config</div>
-            </div>
-            <div class="step">
-                <div class="step-num">3</div>
-                <div class="step-text" data-i18n="ios.step3"><strong>Paste</strong> the configuration above into the config file</div>
-            </div>
-            <div class="step">
-                <div class="step-num">4</div>
-                <div class="step-text" data-i18n="ios.step4">Enable the profile, then open <strong>Growtopia</strong> and play!</div>
-            </div>
+
+            <button class="next-link" onclick="showTab('cert')">
+                <i class="fas fa-arrow-left"></i> <span data-i18n="ios.goCert">Certificate not installed yet?</span>
+            </button>
         </div>
 
         <a href="/" class="back"><i class="fas fa-arrow-left"></i> <span data-i18n="common.back">Back to Home</span></a>
@@ -322,6 +522,21 @@ www.growtopia2.com = 45.142.115.57</div>
 
     <script src="/i18n.js"></script>
     <script>
+        function showTab(name) {
+            ['cert', 'config'].forEach(function (n) {
+                var active = n === name;
+                document.getElementById('panel-' + n).hidden = !active;
+                var tab = document.getElementById('tab-' + n);
+                tab.classList.toggle('active', active);
+                tab.setAttribute('aria-selected', active ? 'true' : 'false');
+            });
+            // Allow deep links: ios.html#config opens the config tab directly
+            history.replaceState(null, '', '#' + name);
+        }
+
+        // Open the tab named in the URL hash (default: certificate)
+        showTab(location.hash === '#config' ? 'config' : 'cert');
+
         function copyConfig() {
             const text = document.getElementById('surgeConfig').textContent;
             navigator.clipboard.writeText(text).then(() => {
