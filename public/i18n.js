@@ -88,7 +88,7 @@
 
             // ── Android ──
             'android.pageTitle': 'SVPS - Setup Android',
-            'android.apkTitle': 'APK Growtopia',
+            'android.apkTitle': 'APK SVPS',
             'android.apkBadge': 'Wajib',
             'android.apkInfo': 'Kamu <strong>wajib memakai APK ini</strong> untuk bisa masuk ke SVPS. APK Growtopia dari Play Store tidak akan terhubung. Uninstall Growtopia lama dulu sebelum memasang APK ini.',
             'android.downloadMainApk': 'Unduh SVPS_5.59.apk',
