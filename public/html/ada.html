@@ -397,6 +397,54 @@
             opacity: 1;
             transform: translateX(-50%) translateY(0);
         }
+                /* Required APK */
+        .required-box {
+            padding: 18px;
+            background: rgba(245,158,11,0.06);
+            border: 1px solid rgba(245,158,11,0.25);
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+
+        .required-head {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #f59e0b;
+            margin-bottom: 10px;
+        }
+
+        .required-head .badge-required {
+            font-size: 8px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            padding: 2px 6px;
+            background: #f59e0b;
+            color: #1a1203;
+            border-radius: 4px;
+        }
+
+        .required-text {
+            font-size: 12px;
+            line-height: 1.55;
+            color: var(--text-secondary);
+            margin-bottom: 14px;
+        }
+
+        .required-text strong { color: var(--text-primary); font-weight: 600; }
+
+        .required-box .action-btn {
+            margin-bottom: 0;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+
+        .required-box .action-btn:hover {
+            box-shadow: 0 4px 25px rgba(245,158,11,0.25);
+        }
     </style>
 </head>
 <body>
@@ -410,7 +458,20 @@
             <h1 data-i18n="android.title">Android Setup</h1>
             <p data-i18n="common.chooseConnect">Choose how you want to connect</p>
         </div>
-
+                <!-- ============ REQUIRED APK ============ -->
+        <div class="required-box">
+            <div class="required-head">
+                <i class="fas fa-triangle-exclamation"></i>
+                <span data-i18n="android.apkTitle">Growtopia APK</span>
+                <span class="badge-required" data-i18n="android.apkBadge">Required</span>
+            </div>
+            <div class="required-text" data-i18n="android.apkInfo">
+                You <strong>must use this APK</strong> to join SVPS. The Growtopia APK from the Play Store will not connect. Uninstall your old Growtopia first before installing this one.
+            </div>
+            <a href="https://www.mediafire.com/file/z190ckenzigss3f/SVPS_5.59.apk/file" target="_blank" rel="noopener" class="action-btn">
+                <i class="fas fa-download"></i> <span data-i18n="android.downloadMainApk">Download SVPS_5.59.apk</span>
+            </a>
+        </div>
         <!-- Tab Switcher -->
         <div class="tabs">
             <button class="tab active" data-tab="auto" onclick="switchTab('auto')">
